@@ -8,3 +8,4 @@
 - Fixed logo (SVG, no fringe) and host photo (`ryan-host.jpg` outdoor headshot)
 - Swapped logo to attached brand asset; added Watch a Replay (YouTube) + Join Next Session scroll CTA
 - Matched CTAs to hard offset pink shadow style; added slim footer linking to growthable.io
+- Conversion engineering: dynamic session date/countdown, form UX, lite YouTube, sticky mobile bar, dark host, final CTA, polish

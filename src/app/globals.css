@@ -56,6 +56,14 @@ body {
   color: white;
 }
 
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+[tabindex]:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
 @keyframes rise {
   from {
     opacity: 0;
@@ -100,12 +108,40 @@ body {
   }
 }
 
-@keyframes shimmer {
+@keyframes register-glow {
   0% {
-    background-position: 0% 50%;
+    box-shadow:
+      0 28px 80px rgba(0, 0, 0, 0.32),
+      0 8px 24px rgba(0, 0, 0, 0.18),
+      0 0 0 0 rgba(232, 64, 106, 0);
+  }
+  35% {
+    box-shadow:
+      0 28px 80px rgba(0, 0, 0, 0.32),
+      0 8px 24px rgba(0, 0, 0, 0.18),
+      0 0 0 6px rgba(232, 64, 106, 0.35),
+      0 0 36px rgba(232, 64, 106, 0.45);
   }
   100% {
-    background-position: 100% 50%;
+    box-shadow:
+      0 28px 80px rgba(0, 0, 0, 0.32),
+      0 8px 24px rgba(0, 0, 0, 0.18),
+      0 0 0 0 rgba(232, 64, 106, 0);
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
   }
 }
 
@@ -117,6 +153,10 @@ body {
   animation: float-in 1s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
+.animate-fade {
+  animation: fade-in 0.35s ease both;
+}
+
 .delay-1 {
   animation-delay: 0.1s;
 }
@@ -125,12 +165,6 @@ body {
 }
 .delay-3 {
   animation-delay: 0.34s;
-}
-.delay-4 {
-  animation-delay: 0.46s;
-}
-.delay-5 {
-  animation-delay: 0.58s;
 }
 
 .mesh-glow {
@@ -141,25 +175,21 @@ body {
   animation: pulse-ring 4.5s ease-in-out infinite;
 }
 
-.grain {
-  position: relative;
-  isolation: isolate;
+.register-pulse {
+  animation: register-glow 1.5s ease-out;
 }
 
-.grain::before {
-  content: "";
-  pointer-events: none;
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-  opacity: 0.28;
-  mix-blend-mode: multiply;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.55'/%3E%3C/svg%3E");
+.reveal {
+  opacity: 0;
+  transform: translateY(12px);
+  transition:
+    opacity 0.55s ease,
+    transform 0.55s ease;
 }
 
-.grain > * {
-  position: relative;
-  z-index: 2;
+.reveal-in {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .field:focus-within {
@@ -173,16 +203,19 @@ body {
   background: var(--cta-face);
   border-radius: 14px;
   margin-bottom: 6px;
+  cursor: pointer;
   transition:
-    transform 0.18s ease,
-    box-shadow 0.18s ease,
-    background-color 0.18s ease;
+    transform 0.15s ease,
+    box-shadow 0.15s ease,
+    background-color 0.15s ease,
+    filter 0.15s ease;
   box-shadow: 6px 6px 0 0 var(--cta-shade);
 }
 
 .cta:hover {
   background: #e53561;
-  transform: translate(2px, 2px);
+  filter: brightness(1.05);
+  transform: translate(2px, 1px);
   box-shadow: 4px 4px 0 0 var(--cta-shade);
 }
 
@@ -191,16 +224,39 @@ body {
   box-shadow: 1px 1px 0 0 var(--cta-shade);
 }
 
+.spinner {
+  display: inline-block;
+  width: 1rem;
+  height: 1rem;
+  border: 2px solid rgba(255, 255, 255, 0.35);
+  border-top-color: #fff;
+  border-radius: 999px;
+  animation: spin 0.7s linear infinite;
+}
+
 @media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
   .animate-rise,
   .animate-float-in,
+  .animate-fade,
   .mesh-glow,
-  .host-ring {
+  .host-ring,
+  .register-pulse {
     animation: none !important;
+  }
+
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
   }
 
   .cta:hover,
   .cta:active {
     transform: none;
+    filter: none;
   }
 }

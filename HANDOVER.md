@@ -10,6 +10,7 @@
 - Added Watch a Replay section (YouTube `HwGJz4rj_jw`) + Join Next Session → `#register`
 - CTA style: solid pink face `#f03e6a` + hard offset shade `#f8ccd4`
 - Slim footer → https://growthable.io
+- Conversion pass: dynamic Tuesday session date + local time, countdown, form validation/UTM/analytics, lite YouTube, sticky mobile CTA, dark host section, final CTA
 
 ## Why
 
