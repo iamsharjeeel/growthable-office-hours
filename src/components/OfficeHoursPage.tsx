@@ -180,7 +180,7 @@ export function OfficeHoursPage() {
             href="https://growthable.io/privacy-policy/"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-accent-muted no-underline underline-offset-2 transition-colors hover:underline"
+            className="no-underline underline-offset-2 transition-colors hover:text-accent-muted hover:underline"
           >
             Privacy Policy
           </a>
@@ -191,7 +191,7 @@ export function OfficeHoursPage() {
             href="https://growthable.io/terms-and-conditions/"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-accent-muted no-underline underline-offset-2 transition-colors hover:underline"
+            className="no-underline underline-offset-2 transition-colors hover:text-accent-muted hover:underline"
           >
             Terms of Service
           </a>
