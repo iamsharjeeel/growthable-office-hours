@@ -1,26 +1,205 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --navy: #152039;
+  --navy-deep: #0f1829;
+  --navy-mid: #1c2d4f;
+  --accent: #e8406a;
+  --accent-hot: #f23e67;
+  --accent-deep: #c72d55;
+  --accent-glow: rgba(232, 64, 106, 0.45);
+  --surface: #ffffff;
+  --host-bg: #e8e9eb;
+  --ink: #1a1f2e;
+  --ink-muted: #4a5163;
+  --line: #d8dbe3;
+  --line-soft: #eceef3;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-navy: var(--navy);
+  --color-navy-deep: var(--navy-deep);
+  --color-navy-mid: var(--navy-mid);
+  --color-accent: var(--accent);
+  --color-accent-hot: var(--accent-hot);
+  --color-accent-deep: var(--accent-deep);
+  --color-surface: var(--surface);
+  --color-host-bg: var(--host-bg);
+  --color-ink: var(--ink);
+  --color-ink-muted: var(--ink-muted);
+  --color-line: var(--line);
+  --color-line-soft: var(--line-soft);
+  --font-sans: var(--font-montserrat);
+  --font-display: var(--font-montserrat);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+  min-height: 100%;
+  background: var(--navy);
+  color: var(--surface);
+  font-family: var(--font-montserrat), system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+::selection {
+  background: color-mix(in srgb, var(--accent) 35%, transparent);
+  color: white;
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(28px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes float-in {
+  from {
+    opacity: 0;
+    transform: translateY(40px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes mesh-drift {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+    opacity: 0.55;
+  }
+  50% {
+    transform: translate3d(2%, -1.5%, 0) scale(1.03);
+    opacity: 0.75;
+  }
+}
+
+@keyframes pulse-ring {
+  0%,
+  100% {
+    box-shadow: 0 18px 40px rgba(232, 64, 106, 0.22);
+  }
+  50% {
+    box-shadow: 0 22px 48px rgba(232, 64, 106, 0.32);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 100% 50%;
+  }
+}
+
+.animate-rise {
+  animation: rise 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.animate-float-in {
+  animation: float-in 1s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.delay-1 {
+  animation-delay: 0.1s;
+}
+.delay-2 {
+  animation-delay: 0.22s;
+}
+.delay-3 {
+  animation-delay: 0.34s;
+}
+.delay-4 {
+  animation-delay: 0.46s;
+}
+.delay-5 {
+  animation-delay: 0.58s;
+}
+
+.mesh-glow {
+  animation: mesh-drift 14s ease-in-out infinite;
+}
+
+.host-ring {
+  animation: pulse-ring 4.5s ease-in-out infinite;
+}
+
+.grain {
+  position: relative;
+  isolation: isolate;
+}
+
+.grain::before {
+  content: "";
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  opacity: 0.28;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.55'/%3E%3C/svg%3E");
+}
+
+.grain > * {
+  position: relative;
+  z-index: 2;
+}
+
+.field:focus-within {
+  border-color: color-mix(in srgb, var(--accent) 55%, var(--line));
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 14%, transparent);
+}
+
+.cta {
+  background: linear-gradient(135deg, var(--accent-hot) 0%, var(--accent) 48%, var(--accent-deep) 100%);
+  background-size: 160% 160%;
+  transition:
+    transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.35s ease,
+    background-position 0.45s ease;
+  box-shadow:
+    0 14px 28px rgba(232, 64, 106, 0.28),
+    inset 0 1px 0 rgba(255, 255, 255, 0.18);
+}
+
+.cta:hover {
+  transform: translateY(-2px);
+  background-position: 100% 50%;
+  box-shadow:
+    0 18px 36px rgba(232, 64, 106, 0.38),
+    inset 0 1px 0 rgba(255, 255, 255, 0.22);
+}
+
+.cta:active {
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-rise,
+  .animate-float-in,
+  .mesh-glow,
+  .host-ring {
+    animation: none !important;
+  }
+
+  .cta:hover {
+    transform: none;
+  }
 }
