@@ -4,6 +4,7 @@ import Image from "next/image";
 import { useState } from "react";
 import { LiteYouTube } from "@/components/LiteYouTube";
 import { Logo } from "@/components/Logo";
+import { LogoMark } from "@/components/LogoMark";
 import { RegisterForm } from "@/components/RegisterForm";
 import { Reveal } from "@/components/Reveal";
 import { ScrollToRegister } from "@/components/ScrollToRegister";
@@ -34,7 +35,7 @@ export function OfficeHoursPage() {
           </header>
 
           <div className="animate-rise delay-1 mt-10 text-center sm:mt-12">
-            <p className="text-[clamp(1.55rem,3.4vw,2.35rem)] font-extrabold tracking-[-0.02em] text-accent uppercase">
+            <p className="text-[clamp(1.55rem,3.4vw,2.35rem)] font-extrabold tracking-[-0.02em] text-accent-muted uppercase">
               Join Our Office Hours
             </p>
             <SessionDate />
@@ -68,7 +69,7 @@ export function OfficeHoursPage() {
                         key={item}
                         className="flex gap-3 text-[0.98rem] leading-[1.55] text-white/90"
                       >
-                        <span className="mt-[0.55em] h-1.5 w-1.5 shrink-0 rounded-full bg-accent shadow-[0_0_10px_var(--accent-glow)]" />
+                        <span className="mt-[0.55em] h-1.5 w-1.5 shrink-0 rounded-full bg-accent-muted" />
                         <span>{item}</span>
                       </li>
                     ))}
@@ -91,7 +92,7 @@ export function OfficeHoursPage() {
             aria-hidden="true"
           />
           <div className="relative mx-auto max-w-4xl text-center">
-            <h2 className="text-[clamp(1.6rem,3vw,2.1rem)] font-extrabold tracking-[0.04em] text-accent uppercase">
+            <h2 className="text-[clamp(1.6rem,3vw,2.1rem)] font-extrabold tracking-[0.04em] text-accent-muted uppercase">
               Watch a Replay
             </h2>
             <p className="mx-auto mt-3 max-w-xl text-[1.02rem] leading-relaxed text-white/75">
@@ -118,11 +119,11 @@ export function OfficeHoursPage() {
       <Reveal>
         <section className="bg-navy px-5 py-16 sm:px-8 sm:py-20 lg:py-24">
           <div className="mx-auto flex max-w-3xl flex-col items-center text-center">
-            <h2 className="text-[clamp(1.6rem,3vw,2.1rem)] font-extrabold tracking-[0.04em] text-accent uppercase">
+            <h2 className="text-[clamp(1.6rem,3vw,2.1rem)] font-extrabold tracking-[0.04em] text-accent-muted uppercase">
               Your Host
             </h2>
 
-            <div className="host-ring mt-10 rounded-full bg-accent p-[7px] sm:mt-12">
+            <div className="host-ring mt-10 rounded-full bg-accent-muted p-[7px] sm:mt-12">
               <div className="overflow-hidden rounded-full bg-navy p-1">
                 <Image
                   src="/ryan-host.jpg"
@@ -137,7 +138,7 @@ export function OfficeHoursPage() {
             </div>
 
             <div className="mt-8">
-              <p className="text-[1.55rem] font-extrabold tracking-[-0.02em] text-accent sm:text-[1.75rem]">
+              <p className="text-[1.55rem] font-extrabold tracking-[-0.02em] text-accent-muted sm:text-[1.75rem]">
                 Ryan O&apos;Connor
               </p>
               <p className="mt-2 text-[1rem] font-medium text-white/70 sm:text-[1.05rem]">
@@ -162,24 +163,35 @@ export function OfficeHoursPage() {
       </Reveal>
 
       <footer className="border-t border-white/10 bg-navy px-5 py-5 sm:px-8">
-        <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-center gap-x-5 gap-y-2">
+        <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-center gap-x-3 gap-y-2 text-sm font-medium text-white/70">
           <a
             href="https://growthable.io"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-sm font-medium text-white/70 transition-colors hover:text-accent"
+            className="inline-flex items-center gap-2 transition-colors hover:text-accent-muted"
           >
-            growthable.io
+            <LogoMark />
+            <span>growthable.io</span>
           </a>
+          <span className="text-white/35" aria-hidden="true">
+            ·
+          </span>
           <a
-            href="/privacy-policy"
-            className="text-sm font-medium text-white/70 transition-colors hover:text-accent"
+            href="https://growthable.io/privacy-policy/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-accent-muted no-underline underline-offset-2 transition-colors hover:underline"
           >
             Privacy Policy
           </a>
+          <span className="text-white/35" aria-hidden="true">
+            ·
+          </span>
           <a
-            href="/terms-of-service"
-            className="text-sm font-medium text-white/70 transition-colors hover:text-accent"
+            href="https://growthable.io/terms-and-conditions/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-accent-muted no-underline underline-offset-2 transition-colors hover:underline"
           >
             Terms of Service
           </a>

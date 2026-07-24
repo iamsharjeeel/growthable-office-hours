@@ -7,7 +7,9 @@
   --accent: #e8406a;
   --accent-hot: #f23e67;
   --accent-deep: #c72d55;
+  --accent-muted: color-mix(in srgb, var(--accent) 45%, #8f97a8 55%);
   --accent-glow: rgba(232, 64, 106, 0.45);
+  --accent-glow-muted: color-mix(in srgb, var(--accent) 18%, transparent);
   --surface: #ffffff;
   --host-bg: #e8e9eb;
   --ink: #1a1f2e;
@@ -23,6 +25,7 @@
   --color-accent: var(--accent);
   --color-accent-hot: var(--accent-hot);
   --color-accent-deep: var(--accent-deep);
+  --color-accent-muted: var(--accent-muted);
   --color-surface: var(--surface);
   --color-host-bg: var(--host-bg);
   --color-ink: var(--ink);
@@ -101,10 +104,10 @@ input:focus-visible,
 @keyframes pulse-ring {
   0%,
   100% {
-    box-shadow: 0 18px 40px rgba(232, 64, 106, 0.22);
+    box-shadow: 0 18px 40px var(--accent-glow-muted);
   }
   50% {
-    box-shadow: 0 22px 48px rgba(232, 64, 106, 0.32);
+    box-shadow: 0 22px 48px color-mix(in srgb, var(--accent) 26%, transparent);
   }
 }
 

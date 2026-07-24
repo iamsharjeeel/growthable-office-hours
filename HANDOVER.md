@@ -2,36 +2,30 @@
 
 ## What changed
 
-- Scaffolded Next.js + Tailwind app for Growthable office hours landing page
-- Matched brand palette (navy `#152039`, accent `#e8406a` / `#f23e67`) and Montserrat typography
-- Built hero with wireframe mesh, design copy, floating register card, host section
-- Logo uses attached brand file (`public/growthable-logo.png`, white bg removed, ink lightened for navy)
-- Host headshot at `public/ryan-host.jpg` (circle + magenta frame)
-- Added Watch a Replay section (YouTube `HwGJz4rj_jw`) + Join Next Session → `#register`
-- CTA style: solid pink face `#f03e6a` + hard offset shade `#f8ccd4`
-- Slim footer → https://growthable.io
-- Conversion pass: dynamic Tuesday session date + local time, countdown, form validation/UTM/analytics, lite YouTube, sticky mobile CTA, dark host section, final CTA
+- Confirmed single hero + single `RegisterForm` / countdown; final CTA after host is button + caption only
+- Privacy / Terms hrefs → growthable.io (new tab); footer + consent microcopy
+- Color hierarchy: `--accent-muted` for eyebrows, icons, countdown label/colons, host ring, play overlay, links; countdown digits neutral gray; full pink reserved for `.cta` buttons
+- Footer logomark: cropped `g` from header wordmark (`public/growthable-mark.png`) in muted pink beside growthable.io
 
 ## Why
 
-Ship a studio-quality branded registration page from the Growthable office-hours design.
+Remove duplicate-hero risk, fix legal URLs, calm pink noise so CTAs own attention, brand the footer.
 
 ## Files touched
 
-- `src/app/page.tsx` — landing composition + session copy
-- `src/app/layout.tsx` — Montserrat + metadata
-- `src/app/globals.css` — brand tokens, motion, grain
-- `src/components/Logo.tsx`
-- `src/components/WireframeMesh.tsx`
-- `src/components/RegisterForm.tsx`
-- `public/ryan-host.jpg` — host headshot (CSS circle + magenta frame)
-- `README.md`, `HANDOVER.md`, `CHANGELOG.md`, `.env.example`
+- `src/app/globals.css` — `--accent-muted` token
+- `src/components/OfficeHoursPage.tsx` — muted accents, footer mark + legal URLs
+- `src/components/RegisterForm.tsx` — muted icons/links, real Privacy/Terms hrefs
+- `src/components/Countdown.tsx` — neutral digits, muted label/colons
+- `src/components/LiteYouTube.tsx` — muted play button
+- `src/components/LogoMark.tsx` — footer `g` mark
+- `public/growthable-mark.png`
+- `README.md`, `HANDOVER.md`, `CHANGELOG.md`
 
 ## Pending
 
 - Wire form submit to CRM / webhook / email provider
-- Keep session date/time current in `src/app/page.tsx` (currently Tuesday July 28 — 2PM PDT)
-- Optional: swap SVG logo for official brand SVG if Growthable provides one
+- Optional: official SVG mark from brand if provided
 
 ## Manual steps
 

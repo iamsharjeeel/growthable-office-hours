@@ -44,7 +44,7 @@ export function LiteYouTube({ videoId, title }: Props) {
       />
       <span className="absolute inset-0 bg-black/25" aria-hidden />
       <span className="absolute inset-0 flex items-center justify-center">
-        <span className="flex h-16 w-16 items-center justify-center rounded-full bg-accent text-white shadow-[0_8px_24px_rgba(0,0,0,0.35)] transition-transform duration-150 group-hover:scale-105 sm:h-[4.5rem] sm:w-[4.5rem]">
+        <span className="flex h-16 w-16 items-center justify-center rounded-full bg-accent-muted text-white shadow-[0_8px_24px_rgba(0,0,0,0.35)] transition-transform duration-150 group-hover:scale-105 sm:h-[4.5rem] sm:w-[4.5rem]">
           <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor" aria-hidden>
             <path d="M8.5 6.8v10.4L18 12 8.5 6.8Z" />
           </svg>

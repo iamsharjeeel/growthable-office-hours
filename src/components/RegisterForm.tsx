@@ -179,7 +179,7 @@ export function RegisterForm({ onRegistered }: Props) {
         ) : (
           <>
             <div className="mb-4 flex items-center gap-3">
-              <span className="flex h-9 w-9 items-center justify-center rounded-full bg-[#fde8ee] text-accent">
+              <span className="flex h-9 w-9 items-center justify-center rounded-full bg-[#f3e6ea] text-accent-muted">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden>
                   <path
                     d="M12 4.5v11.25m0 0 4.5-4.5M12 15.75l-4.5-4.5M5.25 19.5h13.5"
@@ -190,7 +190,7 @@ export function RegisterForm({ onRegistered }: Props) {
                   />
                 </svg>
               </span>
-              <h2 className="text-[1.55rem] font-bold tracking-[-0.02em] text-accent">
+              <h2 className="text-[1.55rem] font-bold tracking-[-0.02em] text-accent-muted">
                 Register Now
               </h2>
             </div>
@@ -206,14 +206,14 @@ export function RegisterForm({ onRegistered }: Props) {
                 <div className="space-y-4">
                   <label htmlFor="name" className="block">
                     <span className="mb-1.5 block text-[0.8rem] font-semibold tracking-[0.01em] text-ink">
-                      Full Name <span className="text-accent">*</span>
+                      Full Name <span className="text-accent-muted">*</span>
                     </span>
                     <span
                       className={`field flex items-center gap-2.5 rounded-xl border bg-white px-3.5 py-3 transition-all duration-200 ${
                         errors.name ? "border-red-500" : "border-line"
                       }`}
                     >
-                      <span className="text-accent">
+                      <span className="text-accent-muted">
                         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden>
                           <path
                             d="M12 12a4.25 4.25 0 1 0-4.25-4.25A4.25 4.25 0 0 0 12 12Zm0 2.25c-4.15 0-7.5 2.1-7.5 4.7V20.5h15v-1.55c0-2.6-3.35-4.7-7.5-4.7Z"
@@ -241,14 +241,14 @@ export function RegisterForm({ onRegistered }: Props) {
 
                   <label htmlFor="phone" className="block">
                     <span className="mb-1.5 block text-[0.8rem] font-semibold tracking-[0.01em] text-ink">
-                      Phone <span className="text-accent">*</span>
+                      Phone <span className="text-accent-muted">*</span>
                     </span>
                     <span
                       className={`field flex items-center gap-2.5 rounded-xl border bg-white px-3.5 py-3 transition-all duration-200 ${
                         errors.phone ? "border-red-500" : "border-line"
                       }`}
                     >
-                      <span className="text-accent">
+                      <span className="text-accent-muted">
                         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden>
                           <path
                             d="M8.2 3.75h2.1l1.05 5.1-1.65 1.05a11.4 11.4 0 0 0 5.4 5.4l1.05-1.65 5.1 1.05v2.1A2.1 2.1 0 0 1 19.2 18.9 14.4 14.4 0 0 1 5.1 4.8a2.1 2.1 0 0 1 3.1-1.05Z"
@@ -276,11 +276,21 @@ export function RegisterForm({ onRegistered }: Props) {
                     <p className="mt-2 text-[0.7rem] leading-relaxed text-[#8b93a7]">
                       By submitting, you agree to receive email and SMS reminders about this
                       session. Msg &amp; data rates may apply. Reply STOP to opt out.{" "}
-                      <a href="/privacy-policy" className="underline underline-offset-2 hover:text-accent">
+                      <a
+                        href="https://growthable.io/privacy-policy/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-accent-muted no-underline underline-offset-2 hover:underline"
+                      >
                         Privacy Policy
                       </a>{" "}
                       and{" "}
-                      <a href="/terms-of-service" className="underline underline-offset-2 hover:text-accent">
+                      <a
+                        href="https://growthable.io/terms-and-conditions/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-accent-muted no-underline underline-offset-2 hover:underline"
+                      >
                         Terms
                       </a>
                       .
@@ -289,14 +299,14 @@ export function RegisterForm({ onRegistered }: Props) {
 
                   <label htmlFor="email" className="block">
                     <span className="mb-1.5 block text-[0.8rem] font-semibold tracking-[0.01em] text-ink">
-                      Email <span className="text-accent">*</span>
+                      Email <span className="text-accent-muted">*</span>
                     </span>
                     <span
                       className={`field flex items-center gap-2.5 rounded-xl border bg-white px-3.5 py-3 transition-all duration-200 ${
                         errors.email ? "border-red-500" : "border-line"
                       }`}
                     >
-                      <span className="text-accent">
+                      <span className="text-accent-muted">
                         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden>
                           <path
                             d="M4 6.75A2.25 2.25 0 0 1 6.25 4.5h11.5A2.25 2.25 0 0 1 20 6.75v10.5A2.25 2.25 0 0 1 17.75 19.5H6.25A2.25 2.25 0 0 1 4 17.25V6.75Zm1.7.45 6.05 4.2a.45.45 0 0 0 .5 0l6.05-4.2v-.6H5.7v.6Zm12.6 1.35-5.85 4.05a1.95 1.95 0 0 1-2.3 0L5.7 8.55v8.2h12.6v-8.2Z"
@@ -340,7 +350,14 @@ export function RegisterForm({ onRegistered }: Props) {
               </button>
 
               <p className="flex items-center justify-center gap-1.5 text-center text-[0.72rem] text-[#8b93a7]">
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" aria-hidden>
+                <svg
+                  width="12"
+                  height="12"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  aria-hidden
+                  className="text-accent-muted"
+                >
                   <path
                     d="M7.5 10.5V8.25a4.5 4.5 0 0 1 9 0v2.25M6.75 10.5h10.5A1.75 1.75 0 0 1 19 12.25v6A1.75 1.75 0 0 1 17.25 20H6.75A1.75 1.75 0 0 1 5 18.25v-6a1.75 1.75 0 0 1 1.75-1.75Z"
                     stroke="currentColor"

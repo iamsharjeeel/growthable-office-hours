@@ -32,18 +32,21 @@ No environment variables required for the current static registration UI.
 ## Project structure
 
 ```
-src/app/                 # layout, page, global styles
-src/components/          # Logo, RegisterForm, WireframeMesh
+src/app/                 # layout, page, global styles, register API
+src/components/          # page sections, form, logo, countdown, replay
+src/lib/session.ts       # next-Tuesday session helpers
 public/growthable-logo.png
-public/ryan-sq.jpg
+public/growthable-mark.png
+public/ryan-host.jpg
 ```
 
 ## Notes
 
-- Registration form is client-side only (success state; no backend yet).
-- Brand assets: `public/growthable-logo.png` + circle-framed host (`public/ryan-host.jpg`).
-- Replay embed: YouTube `HwGJz4rj_jw` in `src/app/page.tsx`.
-- Session copy (date/time) is hard-coded in `src/app/page.tsx`.
+- Registration posts to `/api/register` (stub OK response + client analytics hooks).
+- Brand pink: full saturation on CTA buttons only; `--accent-muted` for secondary accents.
+- Legal links: Privacy → https://growthable.io/privacy-policy/ · Terms → https://growthable.io/terms-and-conditions/
+- Replay embed: YouTube `HwGJz4rj_jw` in `OfficeHoursPage`.
+- Session date/countdown derived in `src/lib/session.ts` (next Tuesday 2PM America/Los_Angeles).
 
 ## Deploy
 
