@@ -59,7 +59,7 @@ export function RegisterForm() {
   }
 
   return (
-    <div className="animate-float-in delay-3 w-full max-w-[420px]">
+    <div id="register" className="animate-float-in delay-3 w-full max-w-[420px] scroll-mt-28">
       <div className="rounded-[22px] bg-white p-7 shadow-[0_28px_80px_rgba(0,0,0,0.32),0_8px_24px_rgba(0,0,0,0.18)] sm:p-8">
         <div className="mb-6 flex items-center gap-3">
           <span className="flex h-9 w-9 items-center justify-center rounded-full bg-[#fde8ee] text-accent">
@@ -113,7 +113,7 @@ export function RegisterForm() {
 
             <button
               type="submit"
-              className="cta mt-2 flex w-full items-center justify-center rounded-xl px-5 py-4 text-[0.95rem] font-extrabold tracking-[0.08em] text-white uppercase"
+              className="cta mt-3 flex w-full items-center justify-center px-5 py-3.5 text-[0.95rem] font-bold tracking-[-0.01em] text-white"
             >
               Register Now!
             </button>

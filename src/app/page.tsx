@@ -10,6 +10,8 @@ const topics = [
   "Live Q&A — bring your setup, we'll help you fix it on the call",
 ];
 
+const REPLAY_ID = "HwGJz4rj_jw";
+
 export default function Home() {
   return (
     <main className="min-h-full">
@@ -70,6 +72,44 @@ export default function Home() {
         </div>
       </section>
 
+      <section className="relative overflow-hidden bg-navy-deep px-5 py-16 sm:px-8 sm:py-20 lg:py-24">
+        <div
+          className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_50%_0%,rgba(232,64,106,0.14),transparent_55%)]"
+          aria-hidden="true"
+        />
+        <div className="relative mx-auto max-w-4xl text-center">
+          <h2 className="text-[clamp(1.6rem,3vw,2.1rem)] font-extrabold tracking-[0.04em] text-accent uppercase">
+            Watch a Replay
+          </h2>
+          <p className="mx-auto mt-3 max-w-xl text-[1.02rem] leading-relaxed text-white/75">
+            Missed a session? Catch the latest walkthrough, then save your seat for the next live one.
+          </p>
+
+          <div className="mx-auto mt-10 overflow-hidden rounded-2xl border border-white/10 bg-black/40 shadow-[0_28px_80px_rgba(0,0,0,0.45)]">
+            <div className="relative aspect-video w-full">
+              <iframe
+                className="absolute inset-0 h-full w-full"
+                src={`https://www.youtube.com/embed/${REPLAY_ID}?rel=0`}
+                title="Growthable office hours replay"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerPolicy="strict-origin-when-cross-origin"
+                allowFullScreen
+              />
+            </div>
+          </div>
+
+          <div className="mt-10 flex flex-col items-center gap-3">
+            <a
+              href="#register"
+              className="cta inline-flex items-center justify-center px-8 py-3.5 text-[0.95rem] font-bold tracking-[-0.01em] text-white"
+            >
+              Join Next Session
+            </a>
+            <p className="text-sm text-white/55">Takes 20 seconds — seats refresh every Tuesday.</p>
+          </div>
+        </div>
+      </section>
+
       <section className="grain bg-host-bg px-5 py-16 sm:px-8 sm:py-20 lg:py-24">
         <div className="mx-auto flex max-w-3xl flex-col items-center text-center">
           <h2 className="animate-rise text-[clamp(1.6rem,3vw,2.1rem)] font-extrabold tracking-[0.04em] text-accent uppercase">
@@ -79,12 +119,12 @@ export default function Home() {
           <div className="animate-float-in delay-2 host-ring mt-10 rounded-full bg-accent p-[7px] sm:mt-12">
             <div className="overflow-hidden rounded-full bg-host-bg p-1">
               <Image
-                src="/ryan-sq.jpg"
+                src="/ryan-host.jpg"
                 alt="Ryan O'Connor, Founder and CEO of Growthable"
-                width={220}
-                height={220}
+                width={420}
+                height={420}
                 priority
-                className="h-[180px] w-[180px] rounded-full object-cover object-[center_18%] sm:h-[210px] sm:w-[210px]"
+                className="h-[180px] w-[180px] rounded-full object-cover object-[center_12%] sm:h-[210px] sm:w-[210px]"
               />
             </div>
           </div>
@@ -99,6 +139,19 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      <footer className="border-t border-black/5 bg-host-bg px-5 py-5 sm:px-8">
+        <div className="mx-auto flex max-w-6xl items-center justify-center">
+          <a
+            href="https://growthable.io"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-sm font-medium text-ink-muted transition-colors hover:text-accent"
+          >
+            growthable.io
+          </a>
+        </div>
+      </footer>
     </main>
   );
 }

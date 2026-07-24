@@ -41,7 +41,8 @@ public/ryan-sq.jpg
 ## Notes
 
 - Registration form is client-side only (success state; no backend yet).
-- Brand assets: transparent logo + circle-framed host headshot.
+- Brand assets: `public/growthable-logo.png` + circle-framed host (`public/ryan-host.jpg`).
+- Replay embed: YouTube `HwGJz4rj_jw` in `src/app/page.tsx`.
 - Session copy (date/time) is hard-coded in `src/app/page.tsx`.
 
 ## Deploy

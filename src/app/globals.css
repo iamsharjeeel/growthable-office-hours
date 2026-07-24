@@ -168,27 +168,27 @@ body {
 }
 
 .cta {
-  background: linear-gradient(135deg, var(--accent-hot) 0%, var(--accent) 48%, var(--accent-deep) 100%);
-  background-size: 160% 160%;
+  --cta-face: #f03e6a;
+  --cta-shade: #f8ccd4;
+  background: var(--cta-face);
+  border-radius: 14px;
+  margin-bottom: 6px;
   transition:
-    transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
-    box-shadow 0.35s ease,
-    background-position 0.45s ease;
-  box-shadow:
-    0 14px 28px rgba(232, 64, 106, 0.28),
-    inset 0 1px 0 rgba(255, 255, 255, 0.18);
+    transform 0.18s ease,
+    box-shadow 0.18s ease,
+    background-color 0.18s ease;
+  box-shadow: 6px 6px 0 0 var(--cta-shade);
 }
 
 .cta:hover {
-  transform: translateY(-2px);
-  background-position: 100% 50%;
-  box-shadow:
-    0 18px 36px rgba(232, 64, 106, 0.38),
-    inset 0 1px 0 rgba(255, 255, 255, 0.22);
+  background: #e53561;
+  transform: translate(2px, 2px);
+  box-shadow: 4px 4px 0 0 var(--cta-shade);
 }
 
 .cta:active {
-  transform: translateY(0);
+  transform: translate(5px, 5px);
+  box-shadow: 1px 1px 0 0 var(--cta-shade);
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -199,7 +199,8 @@ body {
     animation: none !important;
   }
 
-  .cta:hover {
+  .cta:hover,
+  .cta:active {
     transform: none;
   }
 }

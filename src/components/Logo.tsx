@@ -5,10 +5,11 @@ export function Logo({ className = "" }: { className?: string }) {
     <Image
       src="/growthable-logo.png"
       alt="growthable"
-      width={220}
-      height={60}
+      width={240}
+      height={49}
       priority
-      className={`h-auto w-[168px] sm:w-[200px] ${className}`}
+      unoptimized
+      className={`h-9 w-auto sm:h-10 ${className}`}
     />
   );
 }
