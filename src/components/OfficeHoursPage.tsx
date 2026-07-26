@@ -10,15 +10,21 @@ import { ScrollToRegister } from "@/components/ScrollToRegister";
 import { SessionDate } from "@/components/SessionDate";
 import { StickyRegisterBar } from "@/components/StickyRegisterBar";
 import { WireframeMesh } from "@/components/WireframeMesh";
-
-const topics = [
-  "Our proprietary Voice AI — how it handles real inbound calls like a trained rep, not a robot",
-  "Conversational AI that qualifies and books leads while you sleep",
-  "Our ticketing system — built to actually replace the clunky helpdesk tools you're stuck with",
-  "Live Q&A — bring your setup, we'll help you fix it on the call",
-];
+import { LEGAL, SESSION } from "@/lib/session-config";
 
 const REPLAY_ID = "HwGJz4rj_jw";
+
+/**
+ * Growthable's own published figures, mirrored from the stat bar on
+ * growthable.io. Do not invent numbers here — if a stat is not published on
+ * the marketing site, leave it out.
+ */
+const stats = [
+  { value: "24/7/365", label: "Live client support" },
+  { value: "853+", label: "Free GHL tutorials" },
+  { value: "US · AU · UK", label: "Compliance filed for you" },
+  { value: "Unlimited", label: "Sub-accounts, flat rate" },
+];
 
 const heading = "text-[clamp(1.6rem,3vw,2.1rem)] font-extrabold tracking-tight text-slate-deep";
 const ctaButton =
@@ -73,7 +79,7 @@ export function OfficeHoursPage() {
                     This week we&apos;re covering:
                   </p>
                   <ul className="mt-4 space-y-3.5">
-                    {topics.map((item) => (
+                    {SESSION.topics.map((item) => (
                       <li
                         key={item}
                         className="flex gap-3 text-[0.98rem] leading-[1.6] text-ink/80"
@@ -94,15 +100,30 @@ export function OfficeHoursPage() {
         </div>
       </section>
 
+      <section className="border-t border-line bg-mist px-5 py-10 sm:px-8 sm:py-12">
+        <dl className="mx-auto grid max-w-[1120px] grid-cols-2 gap-8 text-center sm:grid-cols-4">
+          {stats.map((stat) => (
+            <div key={stat.label}>
+              <dt className="text-[1.35rem] font-extrabold tracking-tight text-slate-deep sm:text-[1.6rem]">
+                {stat.value}
+              </dt>
+              <dd className="mt-1.5 font-mono text-[0.65rem] uppercase tracking-[0.12em] text-ink/70">
+                {stat.label}
+              </dd>
+            </div>
+          ))}
+        </dl>
+      </section>
+
       <Reveal>
         <section className="border-t border-line px-5 py-20 sm:px-8 sm:py-24 lg:py-28">
           <div className="mx-auto max-w-4xl text-center">
             <h2 className={heading}>
-              Watch a <span className="stroke-under">Replay</span>
+              This Week&apos;s <span className="stroke-under">Replay</span>
             </h2>
             <p className="mx-auto mt-4 max-w-xl text-[1.02rem] leading-relaxed text-ink/75">
-              Missed a session? Catch the latest walkthrough, then save your seat for the next live
-              one.
+              The replay will be posted here right after each session. In the meantime, here&apos;s
+              one of our most useful walkthroughs.
             </p>
 
             <div className="mx-auto mt-12 overflow-hidden rounded-2xl border border-line bg-white shadow-lift-lg">
@@ -177,13 +198,17 @@ export function OfficeHoursPage() {
             <span className="text-brand-deep">g</span>rowthable.io
           </a>
           <a
-            href="/privacy-policy"
+            href={LEGAL.privacy}
+            target="_blank"
+            rel="noopener noreferrer"
             className="text-sm font-medium text-ink/70 underline-offset-4 transition-colors hover:text-brand-deep hover:underline"
           >
             Privacy Policy
           </a>
           <a
-            href="/terms-of-service"
+            href={LEGAL.terms}
+            target="_blank"
+            rel="noopener noreferrer"
             className="text-sm font-medium text-ink/70 underline-offset-4 transition-colors hover:text-brand-deep hover:underline"
           >
             Terms of Service

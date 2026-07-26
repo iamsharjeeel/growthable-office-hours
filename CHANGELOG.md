@@ -19,3 +19,13 @@
   silently dropping the lead
 - Perf: stopped bypassing the image optimizer on the header logo (129 KB -> 8.8 KB) and fixed
   synthetic-bold countdown digits (IBM Plex Mono 700 was never loaded)
+- Legal links now point at growthable.io/privacy-policy/ and /terms-and-conditions/ (both
+  previously 404ed while being referenced by the SMS consent copy)
+- Added OG/Twitter metadata, canonical URL and a generated 1200x630 share card
+- Added a stat row using growthable.io's own published figures, "we'll text you the join
+  link" on the phone field, session duration on the date line, and reframed the replay
+  section as posted-after-each-session
+- Added add-to-calendar (.ics + Google) driven by a new single-source-of-truth session
+  config; AGENTS.md documents the weekly update as a runbook for humans and AI agents
+- Form a11y: fields restructured so the SMS consent paragraph is no longer folded into
+  the phone field's accessible name; added aria-required/aria-invalid/aria-describedby
