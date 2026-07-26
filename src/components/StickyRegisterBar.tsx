@@ -29,8 +29,8 @@ export function StickyRegisterBar({ registered }: Props) {
   if (registered || !formOutOfView) return null;
 
   return (
-    <div className="fixed inset-x-0 bottom-0 z-50 border-t border-white/10 bg-navy/95 px-4 pt-3 backdrop-blur-md lg:hidden pb-[max(0.75rem,env(safe-area-inset-bottom))]">
-      <ScrollToRegister className="cta flex w-full cursor-pointer items-center justify-center px-5 py-3.5 text-[0.95rem] font-bold tracking-[-0.01em] text-white">
+    <div className="fixed inset-x-0 bottom-0 z-50 border-t border-line bg-paper/95 px-4 pt-3 backdrop-blur-md lg:hidden pb-[max(0.75rem,env(safe-area-inset-bottom))]">
+      <ScrollToRegister className="cta flex w-full cursor-pointer items-center justify-center px-5 py-3.5 text-[0.95rem] font-bold tracking-tight text-white">
         Register Now
       </ScrollToRegister>
     </div>

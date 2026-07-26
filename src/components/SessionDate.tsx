@@ -2,6 +2,7 @@
 
 import { startTransition, useEffect, useMemo, useState } from "react";
 import {
+  formatSessionDuration,
   formatSessionHeadline,
   formatVisitorLocalTime,
   getNextSessionDate,
@@ -23,12 +24,12 @@ export function SessionDate() {
 
   return (
     <div>
-      <p className="mt-2 text-[0.95rem] font-medium tracking-[0.04em] text-white/95 sm:text-base">
-        Weekly @{" "}
-        <span className="font-semibold tracking-[0.06em]">{headline}</span>
+      <p className="mt-3 text-[0.95rem] font-medium text-slate-deep sm:text-base">
+        Weekly @ <span className="font-semibold">{headline}</span>
+        <span className="text-ink/70"> · {formatSessionDuration()}</span>
       </p>
       {localLine ? (
-        <p className="mt-1.5 text-[0.8rem] font-medium text-white/70">{localLine}</p>
+        <p className="mt-1.5 text-[0.8rem] font-medium text-ink/70">{localLine}</p>
       ) : null}
     </div>
   );

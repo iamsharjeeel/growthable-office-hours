@@ -1,7 +1,16 @@
 "use client";
 
-import { FormEvent, startTransition, useEffect, useState } from "react";
+import {
+  FormEvent,
+  InputHTMLAttributes,
+  ReactNode,
+  startTransition,
+  useEffect,
+  useState,
+} from "react";
+import { AddToCalendar } from "@/components/AddToCalendar";
 import { Countdown } from "@/components/Countdown";
+import { LEGAL } from "@/lib/session-config";
 
 type FieldErrors = Partial<Record<"name" | "phone" | "email", string>>;
 
@@ -85,6 +94,93 @@ function readUtm(): UtmFields {
   };
 }
 
+const FIELD_ICONS = {
+  name: (
+    <path
+      d="M12 12a4.25 4.25 0 1 0-4.25-4.25A4.25 4.25 0 0 0 12 12Zm0 2.25c-4.15 0-7.5 2.1-7.5 4.7V20.5h15v-1.55c0-2.6-3.35-4.7-7.5-4.7Z"
+      fill="currentColor"
+    />
+  ),
+  phone: (
+    <path
+      d="M8.2 3.75h2.1l1.05 5.1-1.65 1.05a11.4 11.4 0 0 0 5.4 5.4l1.05-1.65 5.1 1.05v2.1A2.1 2.1 0 0 1 19.2 18.9 14.4 14.4 0 0 1 5.1 4.8a2.1 2.1 0 0 1 3.1-1.05Z"
+      fill="currentColor"
+    />
+  ),
+  email: (
+    <path
+      d="M4 6.75A2.25 2.25 0 0 1 6.25 4.5h11.5A2.25 2.25 0 0 1 20 6.75v10.5A2.25 2.25 0 0 1 17.75 19.5H6.25A2.25 2.25 0 0 1 4 17.25V6.75Zm1.7.45 6.05 4.2a.45.45 0 0 0 .5 0l6.05-4.2v-.6H5.7v.6Zm12.6 1.35-5.85 4.05a1.95 1.95 0 0 1-2.3 0L5.7 8.55v8.2h12.6v-8.2Z"
+      fill="currentColor"
+    />
+  ),
+} as const;
+
+type FieldName = "name" | "phone" | "email";
+
+type FieldProps = {
+  name: FieldName;
+  label: string;
+  error?: string;
+  /** Static helper text; also announced via aria-describedby. */
+  hint?: string;
+  children?: ReactNode;
+} & Omit<InputHTMLAttributes<HTMLInputElement>, "name" | "id" | "className">;
+
+/**
+ * One labelled input. The label element deliberately wraps ONLY the label text
+ * — disclosure copy lives outside it and is linked with aria-describedby, so a
+ * screen reader announces "Phone, required" rather than reading the whole SMS
+ * consent paragraph as the field's name.
+ */
+function Field({ name, label, error, hint, children, ...input }: FieldProps) {
+  const hintId = hint ? `${name}-hint` : undefined;
+  const errorId = error ? `${name}-error` : undefined;
+  const describedBy = [hintId, errorId].filter(Boolean).join(" ") || undefined;
+
+  return (
+    <div>
+      <label
+        htmlFor={name}
+        className="mb-1.5 block text-[0.8rem] font-semibold tracking-[0.01em] text-slate-deep"
+      >
+        {label} <span className="text-brand-deep">*</span>
+      </label>
+      <span
+        className={`field flex items-center gap-2.5 rounded-lg border px-3.5 py-3 transition-all duration-200 ${
+          error ? "border-brand-deep bg-brand-tint/40" : "border-line-strong bg-white"
+        }`}
+      >
+        <span className="text-slate-deep/45">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden>
+            {FIELD_ICONS[name]}
+          </svg>
+        </span>
+        <input
+          {...input}
+          id={name}
+          name={name}
+          required
+          aria-required="true"
+          aria-invalid={error ? true : undefined}
+          aria-describedby={describedBy}
+          className="w-full bg-transparent text-[0.95rem] text-ink outline-none placeholder:text-ink/50"
+        />
+      </span>
+      {error ? (
+        <span id={errorId} className="mt-1 block text-[0.75rem] font-medium text-brand-deep">
+          {error}
+        </span>
+      ) : null}
+      {hint ? (
+        <p id={hintId} className="mt-1.5 text-[0.72rem] font-medium text-ink/70">
+          {hint}
+        </p>
+      ) : null}
+      {children}
+    </div>
+  );
+}
+
 type Props = {
   onRegistered?: () => void;
 };
@@ -97,6 +193,7 @@ export function RegisterForm({ onRegistered }: Props) {
   const [utm, setUtm] = useState<UtmFields>(emptyUtm);
   const [submitting, setSubmitting] = useState(false);
   const [success, setSuccess] = useState(false);
+  const [submitFailed, setSubmitFailed] = useState(false);
 
   useEffect(() => {
     startTransition(() => {
@@ -127,6 +224,7 @@ export function RegisterForm({ onRegistered }: Props) {
     if (next.name || next.phone || next.email) return;
 
     setSubmitting(true);
+    setSubmitFailed(false);
     try {
       const res = await fetch("/api/register", {
         method: "POST",
@@ -136,6 +234,8 @@ export function RegisterForm({ onRegistered }: Props) {
           phone,
           email: email.trim(),
           ...utm,
+          page_url: window.location.href,
+          referrer: document.referrer,
         }),
       });
       if (!res.ok) throw new Error("fail");
@@ -144,7 +244,8 @@ export function RegisterForm({ onRegistered }: Props) {
       onRegistered?.();
       window.dispatchEvent(new CustomEvent("office-hours-registered"));
     } catch {
-      /* keep form visible on network failure */
+      // Keep the form filled in and tell them, rather than failing silently.
+      setSubmitFailed(true);
     } finally {
       setSubmitting(false);
     }
@@ -154,11 +255,11 @@ export function RegisterForm({ onRegistered }: Props) {
     <div id="register" className="w-full max-w-[420px] scroll-mt-28">
       <div
         data-register-card
-        className="min-h-[540px] rounded-[22px] bg-white p-7 shadow-[0_28px_80px_rgba(0,0,0,0.32),0_8px_24px_rgba(0,0,0,0.18)] sm:min-h-[560px] sm:p-8"
+        className="min-h-[540px] rounded-2xl border border-line bg-white p-7 shadow-lift-lg sm:min-h-[560px] sm:p-8"
       >
         {success ? (
           <div className="flex h-full min-h-[480px] flex-col items-center justify-center px-2 text-center animate-fade">
-            <span className="mb-5 flex h-14 w-14 items-center justify-center rounded-full bg-[#e8f8ef] text-[#1f9d57]">
+            <span className="mb-5 flex h-14 w-14 items-center justify-center rounded-full bg-[#ecfdf5] text-[#009767]">
               <svg width="28" height="28" viewBox="0 0 24 24" fill="none" aria-hidden>
                 <path
                   d="M5 13.2 9.8 18 19 7"
@@ -169,17 +270,21 @@ export function RegisterForm({ onRegistered }: Props) {
                 />
               </svg>
             </span>
-            <h2 className="text-[1.45rem] font-bold tracking-[-0.02em] text-ink">
+            <h2 className="text-[1.45rem] font-bold tracking-tight text-slate-deep">
               You&apos;re registered!
             </h2>
-            <p className="mt-3 max-w-[18rem] text-[0.95rem] leading-relaxed text-ink-muted">
+            <p className="mt-3 max-w-[18rem] text-[0.95rem] leading-relaxed text-ink/75">
               Check your email for the calendar invite and join link.
             </p>
+
+            <div className="mt-7 w-full border-t border-line pt-6">
+              <AddToCalendar />
+            </div>
           </div>
         ) : (
           <>
             <div className="mb-4 flex items-center gap-3">
-              <span className="flex h-9 w-9 items-center justify-center rounded-full bg-[#fde8ee] text-accent">
+              <span className="flex h-9 w-9 items-center justify-center rounded-full bg-brand-tint text-brand">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden>
                   <path
                     d="M12 4.5v11.25m0 0 4.5-4.5M12 15.75l-4.5-4.5M5.25 19.5h13.5"
@@ -190,7 +295,7 @@ export function RegisterForm({ onRegistered }: Props) {
                   />
                 </svg>
               </span>
-              <h2 className="text-[1.55rem] font-bold tracking-[-0.02em] text-accent">
+              <h2 className="text-[1.55rem] font-bold tracking-tight text-brand">
                 Register Now
               </h2>
             </div>
@@ -202,125 +307,68 @@ export function RegisterForm({ onRegistered }: Props) {
                 <input key={key} type="hidden" name={key} value={value} />
               ))}
 
-              <div className="rounded-2xl border border-line bg-[#fcfcfd] p-4 sm:p-5">
+              <div className="rounded-xl border border-line bg-paper p-4 sm:p-5">
                 <div className="space-y-4">
-                  <label htmlFor="name" className="block">
-                    <span className="mb-1.5 block text-[0.8rem] font-semibold tracking-[0.01em] text-ink">
-                      Full Name <span className="text-accent">*</span>
-                    </span>
-                    <span
-                      className={`field flex items-center gap-2.5 rounded-xl border bg-white px-3.5 py-3 transition-all duration-200 ${
-                        errors.name ? "border-red-500" : "border-line"
-                      }`}
-                    >
-                      <span className="text-accent">
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden>
-                          <path
-                            d="M12 12a4.25 4.25 0 1 0-4.25-4.25A4.25 4.25 0 0 0 12 12Zm0 2.25c-4.15 0-7.5 2.1-7.5 4.7V20.5h15v-1.55c0-2.6-3.35-4.7-7.5-4.7Z"
-                            fill="currentColor"
-                          />
-                        </svg>
-                      </span>
-                      <input
-                        id="name"
-                        name="name"
-                        type="text"
-                        autoComplete="name"
-                        required
-                        placeholder="Jane Cooper"
-                        value={name}
-                        onChange={(e) => setName(e.target.value)}
-                        onBlur={() => onBlur("name", name)}
-                        className="w-full bg-transparent text-[0.95rem] text-ink outline-none placeholder:text-[#9aa1b2]"
-                      />
-                    </span>
-                    {errors.name ? (
-                      <span className="mt-1 block text-[0.75rem] text-red-500">{errors.name}</span>
-                    ) : null}
-                  </label>
+                  <Field
+                    name="name"
+                    label="Full Name"
+                    type="text"
+                    autoComplete="name"
+                    placeholder="Jane Cooper"
+                    value={name}
+                    error={errors.name}
+                    onChange={(e) => setName(e.target.value)}
+                    onBlur={() => onBlur("name", name)}
+                  />
 
-                  <label htmlFor="phone" className="block">
-                    <span className="mb-1.5 block text-[0.8rem] font-semibold tracking-[0.01em] text-ink">
-                      Phone <span className="text-accent">*</span>
-                    </span>
-                    <span
-                      className={`field flex items-center gap-2.5 rounded-xl border bg-white px-3.5 py-3 transition-all duration-200 ${
-                        errors.phone ? "border-red-500" : "border-line"
-                      }`}
-                    >
-                      <span className="text-accent">
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden>
-                          <path
-                            d="M8.2 3.75h2.1l1.05 5.1-1.65 1.05a11.4 11.4 0 0 0 5.4 5.4l1.05-1.65 5.1 1.05v2.1A2.1 2.1 0 0 1 19.2 18.9 14.4 14.4 0 0 1 5.1 4.8a2.1 2.1 0 0 1 3.1-1.05Z"
-                            fill="currentColor"
-                          />
-                        </svg>
-                      </span>
-                      <input
-                        id="phone"
-                        name="phone"
-                        type="tel"
-                        autoComplete="tel"
-                        inputMode="tel"
-                        required
-                        placeholder="+1 (555) 000-0000"
-                        value={phone}
-                        onChange={(e) => setPhone(formatUSPhone(e.target.value))}
-                        onBlur={() => onBlur("phone", phone)}
-                        className="w-full bg-transparent text-[0.95rem] text-ink outline-none placeholder:text-[#9aa1b2]"
-                      />
-                    </span>
-                    {errors.phone ? (
-                      <span className="mt-1 block text-[0.75rem] text-red-500">{errors.phone}</span>
-                    ) : null}
-                    <p className="mt-2 text-[0.7rem] leading-relaxed text-[#8b93a7]">
+                  <Field
+                    name="phone"
+                    label="Phone"
+                    type="tel"
+                    autoComplete="tel"
+                    inputMode="tel"
+                    placeholder="+1 (555) 000-0000"
+                    value={phone}
+                    error={errors.phone}
+                    hint="We&apos;ll text you the join link."
+                    onChange={(e) => setPhone(formatUSPhone(e.target.value))}
+                    onBlur={() => onBlur("phone", phone)}
+                  >
+                    <p className="mt-2 text-[0.7rem] leading-relaxed text-ink/70">
                       By submitting, you agree to receive email and SMS reminders about this
                       session. Msg &amp; data rates may apply. Reply STOP to opt out.{" "}
-                      <a href="/privacy-policy" className="underline underline-offset-2 hover:text-accent">
+                      <a
+                        href={LEGAL.privacy}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="underline underline-offset-2 transition-colors hover:text-brand-deep"
+                      >
                         Privacy Policy
                       </a>{" "}
                       and{" "}
-                      <a href="/terms-of-service" className="underline underline-offset-2 hover:text-accent">
+                      <a
+                        href={LEGAL.terms}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="underline underline-offset-2 transition-colors hover:text-brand-deep"
+                      >
                         Terms
                       </a>
                       .
                     </p>
-                  </label>
+                  </Field>
 
-                  <label htmlFor="email" className="block">
-                    <span className="mb-1.5 block text-[0.8rem] font-semibold tracking-[0.01em] text-ink">
-                      Email <span className="text-accent">*</span>
-                    </span>
-                    <span
-                      className={`field flex items-center gap-2.5 rounded-xl border bg-white px-3.5 py-3 transition-all duration-200 ${
-                        errors.email ? "border-red-500" : "border-line"
-                      }`}
-                    >
-                      <span className="text-accent">
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden>
-                          <path
-                            d="M4 6.75A2.25 2.25 0 0 1 6.25 4.5h11.5A2.25 2.25 0 0 1 20 6.75v10.5A2.25 2.25 0 0 1 17.75 19.5H6.25A2.25 2.25 0 0 1 4 17.25V6.75Zm1.7.45 6.05 4.2a.45.45 0 0 0 .5 0l6.05-4.2v-.6H5.7v.6Zm12.6 1.35-5.85 4.05a1.95 1.95 0 0 1-2.3 0L5.7 8.55v8.2h12.6v-8.2Z"
-                            fill="currentColor"
-                          />
-                        </svg>
-                      </span>
-                      <input
-                        id="email"
-                        name="email"
-                        type="email"
-                        autoComplete="email"
-                        required
-                        placeholder="you@company.com"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                        onBlur={() => onBlur("email", email)}
-                        className="w-full bg-transparent text-[0.95rem] text-ink outline-none placeholder:text-[#9aa1b2]"
-                      />
-                    </span>
-                    {errors.email ? (
-                      <span className="mt-1 block text-[0.75rem] text-red-500">{errors.email}</span>
-                    ) : null}
-                  </label>
+                  <Field
+                    name="email"
+                    label="Email"
+                    type="email"
+                    autoComplete="email"
+                    placeholder="you@company.com"
+                    value={email}
+                    error={errors.email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    onBlur={() => onBlur("email", email)}
+                  />
                 </div>
               </div>
 
@@ -339,7 +387,16 @@ export function RegisterForm({ onRegistered }: Props) {
                 )}
               </button>
 
-              <p className="flex items-center justify-center gap-1.5 text-center text-[0.72rem] text-[#8b93a7]">
+              {submitFailed ? (
+                <p
+                  role="alert"
+                  className="animate-fade rounded-lg bg-brand-tint px-3.5 py-2.5 text-center text-[0.78rem] font-medium leading-relaxed text-brand-deep"
+                >
+                  Something went wrong on our end. Please try again — your details are still here.
+                </p>
+              ) : null}
+
+              <p className="flex items-center justify-center gap-1.5 text-center text-[0.72rem] text-ink/70">
                 <svg width="12" height="12" viewBox="0 0 24 24" fill="none" aria-hidden>
                   <path
                     d="M7.5 10.5V8.25a4.5 4.5 0 0 1 9 0v2.25M6.75 10.5h10.5A1.75 1.75 0 0 1 19 12.25v6A1.75 1.75 0 0 1 17.25 20H6.75A1.75 1.75 0 0 1 5 18.25v-6a1.75 1.75 0 0 1 1.75-1.75Z"

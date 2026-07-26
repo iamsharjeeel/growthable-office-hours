@@ -10,43 +10,59 @@ import { ScrollToRegister } from "@/components/ScrollToRegister";
 import { SessionDate } from "@/components/SessionDate";
 import { StickyRegisterBar } from "@/components/StickyRegisterBar";
 import { WireframeMesh } from "@/components/WireframeMesh";
-
-const topics = [
-  "Our proprietary Voice AI — how it handles real inbound calls like a trained rep, not a robot",
-  "Conversational AI that qualifies and books leads while you sleep",
-  "Our ticketing system — built to actually replace the clunky helpdesk tools you're stuck with",
-  "Live Q&A — bring your setup, we'll help you fix it on the call",
-];
+import { LEGAL, SESSION } from "@/lib/session-config";
 
 const REPLAY_ID = "HwGJz4rj_jw";
+
+/**
+ * Growthable's own published figures, mirrored from the stat bar on
+ * growthable.io. Do not invent numbers here — if a stat is not published on
+ * the marketing site, leave it out.
+ */
+const stats = [
+  { value: "24/7/365", label: "Live client support" },
+  { value: "853+", label: "Free GHL tutorials" },
+  { value: "US · AU · UK", label: "Compliance filed for you" },
+  { value: "Unlimited", label: "Sub-accounts, flat rate" },
+];
+
+const heading = "text-[clamp(1.6rem,3vw,2.1rem)] font-extrabold tracking-tight text-slate-deep";
+const ctaButton =
+  "cta inline-flex cursor-pointer items-center justify-center px-7 py-3.5 text-[0.95rem] font-bold tracking-tight text-white";
 
 export function OfficeHoursPage() {
   const [registered, setRegistered] = useState(false);
 
   return (
     <main className="min-h-full">
-      <section className="relative overflow-hidden bg-navy">
+      <header className="border-b border-line bg-paper/90 backdrop-blur-md">
+        <div className="animate-rise mx-auto flex h-16 w-full max-w-[1120px] items-center justify-center px-5 sm:px-8">
+          <Logo />
+        </div>
+      </header>
+
+      <section className="relative overflow-hidden">
         <WireframeMesh />
 
-        <div className="relative z-10 mx-auto max-w-6xl px-5 pb-16 pt-8 sm:px-8 sm:pb-20 sm:pt-10 lg:px-10 lg:pb-24">
-          <header className="animate-rise flex justify-center">
-            <Logo />
-          </header>
+        <div className="relative z-10 mx-auto max-w-[1120px] px-5 pb-20 pt-14 sm:px-8 sm:pb-24 sm:pt-16 lg:pb-28">
+          <div className="flex flex-col gap-12 lg:grid lg:grid-cols-[minmax(0,1.15fr)_minmax(320px,0.85fr)] lg:grid-rows-[auto_auto] lg:items-start lg:gap-x-14 lg:gap-y-0 xl:gap-x-16">
+            <div className="order-1 animate-rise delay-1 max-w-xl lg:col-start-1 lg:row-start-1 lg:pt-2">
+              <p className="font-mono text-[0.68rem] font-medium uppercase tracking-[0.2em] text-brand-deep sm:text-xs">
+                <span
+                  className="mr-2 inline-block h-px w-6 bg-brand align-middle"
+                  aria-hidden="true"
+                />
+                Join Our Office Hours
+              </p>
 
-          <div className="animate-rise delay-1 mt-10 text-center sm:mt-12">
-            <p className="text-[clamp(1.55rem,3.4vw,2.35rem)] font-extrabold tracking-[-0.02em] text-accent uppercase">
-              Join Our Office Hours
-            </p>
-            <SessionDate />
-          </div>
+              <SessionDate />
 
-          <div className="mt-12 flex flex-col gap-10 lg:mt-14 lg:grid lg:grid-cols-[minmax(0,1.15fr)_minmax(320px,0.85fr)] lg:grid-rows-[auto_auto] lg:items-start lg:gap-x-14 lg:gap-y-0 xl:gap-x-16">
-            <div className="order-1 animate-rise delay-2 max-w-xl lg:col-start-1 lg:row-start-1 lg:pt-2">
-              <h1 className="text-[clamp(1.85rem,3.8vw,2.75rem)] font-extrabold leading-[1.12] tracking-[-0.03em] text-white uppercase">
-                Live Product Walkthroughs, Every Week
+              <h1 className="mt-6 text-[clamp(1.85rem,3.8vw,2.75rem)] font-extrabold leading-[1.14] tracking-tight text-slate-deep">
+                Live Product Walkthroughs,{" "}
+                <span className="stroke-under">Every Week</span>
               </h1>
 
-              <p className="mt-5 max-w-lg text-[1.02rem] leading-[1.7] text-white/88 sm:text-[1.08rem]">
+              <p className="mt-5 max-w-lg text-[1.02rem] leading-[1.75] text-ink/75 sm:text-[1.08rem]">
                 Every Tuesday, we open up Growthable HQ and show you exactly what
                 we&apos;re building — live, unscripted, no fluff.
               </p>
@@ -58,24 +74,24 @@ export function OfficeHoursPage() {
 
             <div className="order-3 max-w-xl lg:col-start-1 lg:row-start-2">
               <Reveal>
-                <div className="mt-0 lg:mt-8">
-                  <p className="text-[1.02rem] font-semibold text-white">
+                <div className="mt-0 lg:mt-10">
+                  <p className="text-[1.02rem] font-semibold text-slate-deep">
                     This week we&apos;re covering:
                   </p>
                   <ul className="mt-4 space-y-3.5">
-                    {topics.map((item) => (
+                    {SESSION.topics.map((item) => (
                       <li
                         key={item}
-                        className="flex gap-3 text-[0.98rem] leading-[1.55] text-white/90"
+                        className="flex gap-3 text-[0.98rem] leading-[1.6] text-ink/80"
                       >
-                        <span className="mt-[0.55em] h-1.5 w-1.5 shrink-0 rounded-full bg-accent shadow-[0_0_10px_var(--accent-glow)]" />
+                        <span className="mt-[0.6em] h-1.5 w-1.5 shrink-0 rounded-full bg-brand" />
                         <span>{item}</span>
                       </li>
                     ))}
                   </ul>
                 </div>
 
-                <p className="mt-8 text-[1.05rem] font-semibold tracking-[-0.01em] text-white">
+                <p className="mt-8 text-[1.05rem] font-semibold tracking-tight text-slate-deep">
                   Come with questions. Leave with a plan.
                 </p>
               </Reveal>
@@ -84,30 +100,39 @@ export function OfficeHoursPage() {
         </div>
       </section>
 
+      <section className="border-t border-line bg-mist px-5 py-10 sm:px-8 sm:py-12">
+        <dl className="mx-auto grid max-w-[1120px] grid-cols-2 gap-8 text-center sm:grid-cols-4">
+          {stats.map((stat) => (
+            <div key={stat.label}>
+              <dt className="text-[1.35rem] font-extrabold tracking-tight text-slate-deep sm:text-[1.6rem]">
+                {stat.value}
+              </dt>
+              <dd className="mt-1.5 font-mono text-[0.65rem] uppercase tracking-[0.12em] text-ink/70">
+                {stat.label}
+              </dd>
+            </div>
+          ))}
+        </dl>
+      </section>
+
       <Reveal>
-        <section className="relative overflow-hidden bg-navy-deep px-5 py-16 sm:px-8 sm:py-20 lg:py-24">
-          <div
-            className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_50%_0%,rgba(232,64,106,0.14),transparent_55%)]"
-            aria-hidden="true"
-          />
-          <div className="relative mx-auto max-w-4xl text-center">
-            <h2 className="text-[clamp(1.6rem,3vw,2.1rem)] font-extrabold tracking-[0.04em] text-accent uppercase">
-              Watch a Replay
+        <section className="border-t border-line px-5 py-20 sm:px-8 sm:py-24 lg:py-28">
+          <div className="mx-auto max-w-4xl text-center">
+            <h2 className={heading}>
+              This Week&apos;s <span className="stroke-under">Replay</span>
             </h2>
-            <p className="mx-auto mt-3 max-w-xl text-[1.02rem] leading-relaxed text-white/75">
-              Missed a session? Catch the latest walkthrough, then save your seat for the next live
-              one.
+            <p className="mx-auto mt-4 max-w-xl text-[1.02rem] leading-relaxed text-ink/75">
+              The replay will be posted here right after each session. In the meantime, here&apos;s
+              one of our most useful walkthroughs.
             </p>
 
-            <div className="mx-auto mt-10 overflow-hidden rounded-2xl border border-white/10 bg-black/40 shadow-[0_28px_80px_rgba(0,0,0,0.45)]">
+            <div className="mx-auto mt-12 overflow-hidden rounded-2xl border border-line bg-white shadow-lift-lg">
               <LiteYouTube videoId={REPLAY_ID} title="Growthable office hours replay" />
             </div>
 
-            <div className="mt-10 flex flex-col items-center gap-3">
-              <ScrollToRegister className="cta inline-flex cursor-pointer items-center justify-center px-8 py-3.5 text-[0.95rem] font-bold tracking-[-0.01em] text-white">
-                Join Next Session
-              </ScrollToRegister>
-              <p className="text-sm text-white/70">
+            <div className="mt-12 flex flex-col items-center gap-3">
+              <ScrollToRegister className={ctaButton}>Join Next Session</ScrollToRegister>
+              <p className="text-sm text-ink/70">
                 Takes 20 seconds — seats refresh every Tuesday.
               </p>
             </div>
@@ -116,14 +141,14 @@ export function OfficeHoursPage() {
       </Reveal>
 
       <Reveal>
-        <section className="bg-navy px-5 py-16 sm:px-8 sm:py-20 lg:py-24">
+        <section className="border-t border-line px-5 py-20 sm:px-8 sm:py-24 lg:py-28">
           <div className="mx-auto flex max-w-3xl flex-col items-center text-center">
-            <h2 className="text-[clamp(1.6rem,3vw,2.1rem)] font-extrabold tracking-[0.04em] text-accent uppercase">
-              Your Host
+            <h2 className={heading}>
+              Your <span className="stroke-under">Host</span>
             </h2>
 
-            <div className="host-ring mt-10 rounded-full bg-accent p-[7px] sm:mt-12">
-              <div className="overflow-hidden rounded-full bg-navy p-1">
+            <div className="host-ring mt-12 rounded-full bg-brand/25 p-[6px]">
+              <div className="overflow-hidden rounded-full bg-paper p-1">
                 <Image
                   src="/ryan-host.jpg"
                   alt="Ryan O'Connor, Founder and CEO of Growthable"
@@ -137,10 +162,10 @@ export function OfficeHoursPage() {
             </div>
 
             <div className="mt-8">
-              <p className="text-[1.55rem] font-extrabold tracking-[-0.02em] text-accent sm:text-[1.75rem]">
+              <p className="text-[1.55rem] font-extrabold tracking-tight text-brand sm:text-[1.75rem]">
                 Ryan O&apos;Connor
               </p>
-              <p className="mt-2 text-[1rem] font-medium text-white/70 sm:text-[1.05rem]">
+              <p className="mt-2 text-[1rem] font-medium text-ink/70 sm:text-[1.05rem]">
                 Founder and CEO — Growthable
               </p>
             </div>
@@ -149,37 +174,42 @@ export function OfficeHoursPage() {
       </Reveal>
 
       <Reveal>
-        <section className="bg-navy-deep px-5 py-14 sm:px-8 sm:py-16">
+        <section className="border-t border-line px-5 py-20 sm:px-8 sm:py-24">
           <div className="mx-auto flex max-w-3xl flex-col items-center text-center">
-            <ScrollToRegister className="cta inline-flex cursor-pointer items-center justify-center px-8 py-3.5 text-[0.95rem] font-bold tracking-[-0.01em] text-white">
-              Register Now
-            </ScrollToRegister>
-            <p className="mt-3 text-sm text-white/70">
+            <h2 className={heading}>
+              See You <span className="stroke-under">Tuesday</span>
+            </h2>
+            <ScrollToRegister className={`${ctaButton} mt-9`}>Register Now</ScrollToRegister>
+            <p className="mt-3 text-sm text-ink/70">
               Takes 20 seconds — seats refresh every Tuesday.
             </p>
           </div>
         </section>
       </Reveal>
 
-      <footer className="border-t border-white/10 bg-navy px-5 py-5 sm:px-8">
-        <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-center gap-x-5 gap-y-2">
+      <footer className="border-t border-line px-5 py-8 sm:px-8">
+        <div className="mx-auto flex max-w-[1120px] flex-wrap items-center justify-center gap-x-6 gap-y-3">
           <a
             href="https://growthable.io"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-sm font-medium text-white/70 transition-colors hover:text-accent"
+            className="text-sm font-semibold tracking-tight text-slate-deep underline-offset-4 transition-colors hover:text-brand-deep hover:underline"
           >
-            growthable.io
+            <span className="text-brand-deep">g</span>rowthable.io
           </a>
           <a
-            href="/privacy-policy"
-            className="text-sm font-medium text-white/70 transition-colors hover:text-accent"
+            href={LEGAL.privacy}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-sm font-medium text-ink/70 underline-offset-4 transition-colors hover:text-brand-deep hover:underline"
           >
             Privacy Policy
           </a>
           <a
-            href="/terms-of-service"
-            className="text-sm font-medium text-white/70 transition-colors hover:text-accent"
+            href={LEGAL.terms}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-sm font-medium text-ink/70 underline-offset-4 transition-colors hover:text-brand-deep hover:underline"
           >
             Terms of Service
           </a>
