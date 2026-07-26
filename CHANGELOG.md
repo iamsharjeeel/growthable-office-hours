@@ -12,3 +12,4 @@
 - Rebuilt the visual system on the real growthable.io design tokens: light cream (`--paper`) page,
   slate headings, single brand pink, Poppins + IBM Plex Mono, offset "lift" shadows, `.stroke-under`
   heading accent, hairline section dividers (styling only — no copy or behaviour changes)
+- Added a closing heading ("See You Tuesday") to the final CTA section so it is not a bare button

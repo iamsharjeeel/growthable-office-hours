@@ -153,9 +153,12 @@ export function OfficeHoursPage() {
       </Reveal>
 
       <Reveal>
-        <section className="border-t border-line px-5 py-18 sm:px-8 sm:py-20">
+        <section className="border-t border-line px-5 py-20 sm:px-8 sm:py-24">
           <div className="mx-auto flex max-w-3xl flex-col items-center text-center">
-            <ScrollToRegister className={ctaButton}>Register Now</ScrollToRegister>
+            <h2 className={heading}>
+              See You <span className="stroke-under">Tuesday</span>
+            </h2>
+            <ScrollToRegister className={`${ctaButton} mt-9`}>Register Now</ScrollToRegister>
             <p className="mt-3 text-sm text-ink/70">
               Takes 20 seconds — seats refresh every Tuesday.
             </p>
