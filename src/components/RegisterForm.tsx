@@ -97,6 +97,7 @@ export function RegisterForm({ onRegistered }: Props) {
   const [utm, setUtm] = useState<UtmFields>(emptyUtm);
   const [submitting, setSubmitting] = useState(false);
   const [success, setSuccess] = useState(false);
+  const [submitFailed, setSubmitFailed] = useState(false);
 
   useEffect(() => {
     startTransition(() => {
@@ -127,6 +128,7 @@ export function RegisterForm({ onRegistered }: Props) {
     if (next.name || next.phone || next.email) return;
 
     setSubmitting(true);
+    setSubmitFailed(false);
     try {
       const res = await fetch("/api/register", {
         method: "POST",
@@ -136,6 +138,8 @@ export function RegisterForm({ onRegistered }: Props) {
           phone,
           email: email.trim(),
           ...utm,
+          page_url: window.location.href,
+          referrer: document.referrer,
         }),
       });
       if (!res.ok) throw new Error("fail");
@@ -144,7 +148,8 @@ export function RegisterForm({ onRegistered }: Props) {
       onRegistered?.();
       window.dispatchEvent(new CustomEvent("office-hours-registered"));
     } catch {
-      /* keep form visible on network failure */
+      // Keep the form filled in and tell them, rather than failing silently.
+      setSubmitFailed(true);
     } finally {
       setSubmitting(false);
     }
@@ -338,6 +343,15 @@ export function RegisterForm({ onRegistered }: Props) {
                   "Register Now!"
                 )}
               </button>
+
+              {submitFailed ? (
+                <p
+                  role="alert"
+                  className="animate-fade rounded-lg bg-brand-tint px-3.5 py-2.5 text-center text-[0.78rem] font-medium leading-relaxed text-brand-deep"
+                >
+                  Something went wrong on our end. Please try again — your details are still here.
+                </p>
+              ) : null}
 
               <p className="flex items-center justify-center gap-1.5 text-center text-[0.72rem] text-ink/70">
                 <svg width="12" height="12" viewBox="0 0 24 24" fill="none" aria-hidden>
