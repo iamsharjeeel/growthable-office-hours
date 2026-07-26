@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "check:tz": "node scripts/check-timezones.mjs"
   },
   "dependencies": {
     "next": "16.2.11",

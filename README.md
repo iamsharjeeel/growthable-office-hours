@@ -26,6 +26,7 @@ Open [http://localhost:3000](http://localhost:3000).
 | `npm run build` | Production build |
 | `npm run start` | Serve production build |
 | `npm run lint` | ESLint |
+| `npm run check:tz` | Checks the visitor-local time line across 11 timezones against a running server (needs `npm i -D playwright`; see `AGENTS.md`) |
 
 ## Updating the weekly session
 

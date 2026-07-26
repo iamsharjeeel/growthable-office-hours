@@ -79,11 +79,39 @@ npm run lint && npm run build
 npx next start -p 3000 &
 curl -s localhost:3000/session.ics          # DTSTART/DTEND must match the page
 curl -s localhost:3000/ | grep "Weekly @"   # date line must match the invite
+npm run check:tz                            # visitor-local line, 11 timezones
 ```
 
 The page date and the `.ics` `DTSTART` must agree. If they don't, something has
 been hardcoded that should have been derived — fix that rather than patching one
 side.
+
+### `npm run check:tz`
+
+The hero's second line — `(that's Wed, Jul 29, 2:00 AM your time)` — is rendered
+client-side from the browser's `Intl` timezone. It is **not in the SSR HTML**, so
+`curl | grep` cannot see it and its absence there is not a bug. The script drives
+a real browser with an overridden timezone and asserts, for each zone, that:
+
+- the visitor-local line is present and correct,
+- it is *suppressed* in `America/Los_Angeles` — deliberate, because the headline
+  already states the session's own zone,
+- the `Weekly @ …` headline is **identical in every zone** (it is always printed
+  in the session's timezone, so any variation means a timezone leaked into it).
+
+It exits non-zero on any of those, so it is safe to run in CI. Playwright is
+deliberately not a dependency — install on demand:
+
+```bash
+npm i -D playwright && npx playwright install chromium
+npx next start -p 3000 &
+npm run check:tz
+npm run check:tz -- --port 4000 Asia/Dubai America/Sao_Paulo   # custom port/zones
+```
+
+To eyeball it by hand instead: DevTools → `Cmd/Ctrl+Shift+P` → "Show Sensors" →
+set **Location** (or just a custom Timezone ID), then **reload** — the line is set
+in an effect on mount, so changing the override without reloading does nothing.
 
 # Other conventions in this repo
 

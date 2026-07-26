@@ -29,3 +29,6 @@
   config; AGENTS.md documents the weekly update as a runbook for humans and AI agents
 - Form a11y: fields restructured so the SMS consent paragraph is no longer folded into
   the phone field's accessible name; added aria-required/aria-invalid/aria-describedby
+- Added `npm run check:tz` — drives a real browser across 11 timezones to verify the
+  visitor-local time line, its deliberate suppression in the session timezone, and that the
+  headline never varies by visitor zone
