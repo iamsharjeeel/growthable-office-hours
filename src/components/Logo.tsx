@@ -3,7 +3,7 @@ import Image from "next/image";
 export function Logo({ className = "" }: { className?: string }) {
   return (
     <Image
-      src="/growthable-logo.png"
+      src="/growthable-logo-dark.png"
       alt="growthable"
       width={240}
       height={49}

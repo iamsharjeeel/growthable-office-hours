@@ -4,6 +4,7 @@ export function WireframeMesh() {
       className="pointer-events-none absolute inset-0 overflow-hidden"
       aria-hidden="true"
     >
+      <div className="absolute -right-44 -top-44 h-[520px] w-[520px] rounded-full bg-brand-tint blur-3xl" />
       <div className="absolute -left-[18%] top-[-8%] h-[120%] w-[78%] mesh-glow">
         <svg
           className="h-full w-full"
@@ -14,9 +15,9 @@ export function WireframeMesh() {
         >
           <defs>
             <linearGradient id="meshStroke" x1="0" y1="0" x2="800" y2="900" gradientUnits="userSpaceOnUse">
-              <stop stopColor="#f23e67" stopOpacity="0.85" />
-              <stop offset="0.45" stopColor="#e8406a" stopOpacity="0.45" />
-              <stop offset="1" stopColor="#7b2cff" stopOpacity="0.15" />
+              <stop style={{ stopColor: "var(--brand)" }} stopOpacity="0.34" />
+              <stop offset="0.45" style={{ stopColor: "var(--brand)" }} stopOpacity="0.18" />
+              <stop offset="1" style={{ stopColor: "var(--brand-deep)" }} stopOpacity="0.06" />
             </linearGradient>
             <radialGradient id="meshFade" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(220 380) rotate(90) scale(520 420)">
               <stop stopColor="white" stopOpacity="1" />
@@ -58,7 +59,7 @@ export function WireframeMesh() {
           </g>
         </svg>
       </div>
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_20%_40%,rgba(232,64,106,0.16),transparent_55%),radial-gradient(ellipse_at_80%_0%,rgba(120,60,255,0.08),transparent_45%),linear-gradient(180deg,rgba(15,24,41,0.15)_0%,rgba(21,32,57,0.55)_70%,rgba(21,32,57,0.95)_100%)]" />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_20%_40%,rgba(240,62,106,0.07),transparent_55%),linear-gradient(180deg,rgba(251,250,248,0)_0%,rgba(251,250,248,0.7)_74%,rgba(251,250,248,1)_100%)]" />
     </div>
   );
 }

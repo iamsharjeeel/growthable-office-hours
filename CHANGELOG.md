@@ -9,3 +9,6 @@
 - Swapped logo to attached brand asset; added Watch a Replay (YouTube) + Join Next Session scroll CTA
 - Matched CTAs to hard offset pink shadow style; added slim footer linking to growthable.io
 - Conversion engineering: dynamic session date/countdown, form UX, lite YouTube, sticky mobile bar, dark host, final CTA, polish
+- Rebuilt the visual system on the real growthable.io design tokens: light cream (`--paper`) page,
+  slate headings, single brand pink, Poppins + IBM Plex Mono, offset "lift" shadows, `.stroke-under`
+  heading accent, hairline section dividers (styling only — no copy or behaviour changes)

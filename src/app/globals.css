@@ -1,36 +1,45 @@
 @import "tailwindcss";
 
+/*
+ * Growthable brand tokens.
+ * Sampled verbatim from the live design system on growthable.io — same names,
+ * same values. Keep these in sync with the marketing site rather than forking
+ * a second palette here.
+ */
 :root {
-  --navy: #152039;
-  --navy-deep: #0f1829;
-  --navy-mid: #1c2d4f;
-  --accent: #e8406a;
-  --accent-hot: #f23e67;
-  --accent-deep: #c72d55;
-  --accent-glow: rgba(232, 64, 106, 0.45);
-  --surface: #ffffff;
-  --host-bg: #e8e9eb;
-  --ink: #1a1f2e;
-  --ink-muted: #4a5163;
-  --line: #d8dbe3;
-  --line-soft: #eceef3;
+  --paper: #fbfaf8;
+  --mist: #f2f1ed;
+  --ink: #25313d;
+  --slate-deep: #34475b;
+  --brand: #f03e6a;
+  --brand-deep: #d62e58;
+  --brand-tint: #fdedf1;
+  --line: #e4e2dc;
+  --line-strong: #c9cfd5;
+
+  /* Signature offset "lift" shadows from the marketing site. */
+  --lift: 6px 6px 0 0 rgba(52, 71, 91, 0.1);
+  --lift-lg: 10px 10px 0 0 rgba(52, 71, 91, 0.1);
+  --lift-brand: 6px 6px 0 0 rgba(240, 62, 106, 0.25);
 }
 
 @theme inline {
-  --color-navy: var(--navy);
-  --color-navy-deep: var(--navy-deep);
-  --color-navy-mid: var(--navy-mid);
-  --color-accent: var(--accent);
-  --color-accent-hot: var(--accent-hot);
-  --color-accent-deep: var(--accent-deep);
-  --color-surface: var(--surface);
-  --color-host-bg: var(--host-bg);
+  --color-paper: var(--paper);
+  --color-mist: var(--mist);
   --color-ink: var(--ink);
-  --color-ink-muted: var(--ink-muted);
+  --color-slate-deep: var(--slate-deep);
+  --color-brand: var(--brand);
+  --color-brand-deep: var(--brand-deep);
+  --color-brand-tint: var(--brand-tint);
   --color-line: var(--line);
-  --color-line-soft: var(--line-soft);
-  --font-sans: var(--font-montserrat);
-  --font-display: var(--font-montserrat);
+  --color-line-strong: var(--line-strong);
+
+  --shadow-lift: var(--lift);
+  --shadow-lift-lg: var(--lift-lg);
+  --shadow-lift-brand: var(--lift-brand);
+
+  --font-sans: var(--font-poppins), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-plex-mono), ui-monospace, monospace;
 }
 
 * {
@@ -44,24 +53,46 @@ html {
 body {
   margin: 0;
   min-height: 100%;
-  background: var(--navy);
-  color: var(--surface);
-  font-family: var(--font-montserrat), system-ui, sans-serif;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-poppins), system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 ::selection {
-  background: color-mix(in srgb, var(--accent) 35%, transparent);
-  color: white;
+  background: var(--brand);
+  color: #fff;
 }
 
 a:focus-visible,
 button:focus-visible,
 input:focus-visible,
 [tabindex]:focus-visible {
-  outline: 2px solid var(--accent);
-  outline-offset: 3px;
+  outline: 2px solid var(--brand);
+  outline-offset: 2px;
+}
+
+/*
+ * Accent underline behind a key phrase in a heading — the site's `.stroke-under`.
+ */
+.stroke-under {
+  position: relative;
+  white-space: nowrap;
+}
+
+.stroke-under::after {
+  content: "";
+  position: absolute;
+  right: -0.05em;
+  bottom: 0.02em;
+  left: -0.05em;
+  z-index: -1;
+  height: 0.28em;
+  border-radius: 999px;
+  background: var(--brand);
+  opacity: 0.35;
+  transform: skewY(-0.5deg);
 }
 
 @keyframes rise {
@@ -101,32 +132,28 @@ input:focus-visible,
 @keyframes pulse-ring {
   0%,
   100% {
-    box-shadow: 0 18px 40px rgba(232, 64, 106, 0.22);
+    box-shadow: 0 10px 30px rgba(52, 71, 91, 0.1);
   }
   50% {
-    box-shadow: 0 22px 48px rgba(232, 64, 106, 0.32);
+    box-shadow: 0 14px 36px rgba(240, 62, 106, 0.16);
   }
 }
 
 @keyframes register-glow {
   0% {
     box-shadow:
-      0 28px 80px rgba(0, 0, 0, 0.32),
-      0 8px 24px rgba(0, 0, 0, 0.18),
-      0 0 0 0 rgba(232, 64, 106, 0);
+      var(--lift-lg),
+      0 0 0 0 rgba(240, 62, 106, 0);
   }
   35% {
     box-shadow:
-      0 28px 80px rgba(0, 0, 0, 0.32),
-      0 8px 24px rgba(0, 0, 0, 0.18),
-      0 0 0 6px rgba(232, 64, 106, 0.35),
-      0 0 36px rgba(232, 64, 106, 0.45);
+      var(--lift-lg),
+      0 0 0 6px rgba(240, 62, 106, 0.28);
   }
   100% {
     box-shadow:
-      0 28px 80px rgba(0, 0, 0, 0.32),
-      0 8px 24px rgba(0, 0, 0, 0.18),
-      0 0 0 0 rgba(232, 64, 106, 0);
+      var(--lift-lg),
+      0 0 0 0 rgba(240, 62, 106, 0);
   }
 }
 
@@ -193,35 +220,40 @@ input:focus-visible,
 }
 
 .field:focus-within {
-  border-color: color-mix(in srgb, var(--accent) 55%, var(--line));
-  box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 14%, transparent);
+  border-color: var(--brand);
+  box-shadow: 0 0 0 3px rgba(240, 62, 106, 0.14);
 }
 
+/* The `.field` wrapper draws the focus ring, so the inner input skips its own. */
+.field input:focus-visible {
+  outline: none;
+}
+
+/*
+ * Primary CTA — the site's primary button: solid brand fill, rounded-square
+ * corners, offset brand-tinted lift shadow, deepen + lift on hover.
+ */
 .cta {
-  --cta-face: #f03e6a;
-  --cta-shade: #f8ccd4;
-  background: var(--cta-face);
-  border-radius: 14px;
+  border-radius: 0.5rem;
+  background: var(--brand);
   margin-bottom: 6px;
   cursor: pointer;
+  box-shadow: var(--lift-brand);
   transition:
     transform 0.15s ease,
     box-shadow 0.15s ease,
-    background-color 0.15s ease,
-    filter 0.15s ease;
-  box-shadow: 6px 6px 0 0 var(--cta-shade);
+    background-color 0.15s ease;
 }
 
 .cta:hover {
-  background: #e53561;
-  filter: brightness(1.05);
-  transform: translate(2px, 1px);
-  box-shadow: 4px 4px 0 0 var(--cta-shade);
+  background: var(--brand-deep);
+  transform: translateY(-2px);
+  box-shadow: var(--lift-lg);
 }
 
 .cta:active {
-  transform: translate(5px, 5px);
-  box-shadow: 1px 1px 0 0 var(--cta-shade);
+  transform: translateY(0);
+  box-shadow: var(--lift);
 }
 
 .spinner {
@@ -257,6 +289,5 @@ input:focus-visible,
   .cta:hover,
   .cta:active {
     transform: none;
-    filter: none;
   }
 }
