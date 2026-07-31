@@ -1,5 +1,9 @@
 # Changelog
 
+## 2026-07-31
+
+- Swapped office hours replay to YouTube live `Qh-HPZ1KI94` and added a "We covered" agenda under the embed
+
 ## 2026-07-24
 
 - Added Growthable office hours landing page (hero, register form, host section) with brand colors and Montserrat

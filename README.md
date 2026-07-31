@@ -71,7 +71,7 @@ public/ryan-host.jpg
 - Registrations POST to `/api/register`, which forwards to LeadConnector
   (GoHighLevel) server-side with UTM/click-id attribution. See `HANDOVER.md` for
   the payload shape.
-- Replay embed: YouTube `HwGJz4rj_jw` (`REPLAY_ID` in `OfficeHoursPage.tsx`).
+- Replay embed: YouTube live `Qh-HPZ1KI94` (`REPLAY_ID` in `OfficeHoursPage.tsx`).
 - Analytics: `fireAnalytics()` in `RegisterForm.tsx` pushes to `dataLayer` and
   calls `fbq`/`gtag` **if present** — no pixel, GTM or GA4 tag is installed on
   the page yet, so these are currently no-ops.

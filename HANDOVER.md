@@ -2,12 +2,13 @@
 
 ## What changed
 
+- Replay section now embeds YouTube live `Qh-HPZ1KI94` with a "We covered" list under the player
 - Scaffolded Next.js + Tailwind app for Growthable office hours landing page
 - Matched brand palette (navy `#152039`, accent `#e8406a` / `#f23e67`) and Montserrat typography
 - Built hero with wireframe mesh, design copy, floating register card, host section
 - Logo uses attached brand file (`public/growthable-logo.png`, white bg removed, ink lightened for navy)
 - Host headshot at `public/ryan-host.jpg` (circle + magenta frame)
-- Added Watch a Replay section (YouTube `HwGJz4rj_jw`) + Join Next Session → `#register`
+- Added Watch a Replay section (YouTube `Qh-HPZ1KI94`) + Join Next Session → `#register`
 - CTA style: solid pink face `#f03e6a` + hard offset shade `#f8ccd4`
 - Slim footer → https://growthable.io
 - Conversion pass: dynamic Tuesday session date + local time, countdown, form validation/UTM/analytics, lite YouTube, sticky mobile CTA, dark host section, final CTA
@@ -137,8 +138,9 @@ entered values preserved.
 - OG card renders in Satori's default sans, not Poppins — Satori needs raw font
   bytes and cannot use `next/font`. `src/app/opengraph-image.tsx` has the exact
   5-line upgrade in a comment; drop two Poppins TTFs into `assets/` to apply it.
-- Replay section is placeholder-framed ("posted here right after each session")
-  pointing at video `HwGJz4rj_jw`. Swap `REPLAY_ID` once real replays exist.
+- Replay section points at YouTube live `Qh-HPZ1KI94` with a "We covered" agenda
+  under the embed. Swap `REPLAY_ID` / `REPLAY_COVERED` in `OfficeHoursPage.tsx`
+  when the next replay lands.
 - `public/growthable-logo.png` (white wordmark, for dark backgrounds) is now unused — the page uses
   `growthable-logo-dark.png`. Kept in case a dark surface comes back.
 

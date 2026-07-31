@@ -12,7 +12,14 @@ import { StickyRegisterBar } from "@/components/StickyRegisterBar";
 import { WireframeMesh } from "@/components/WireframeMesh";
 import { LEGAL, SESSION } from "@/lib/session-config";
 
-const REPLAY_ID = "HwGJz4rj_jw";
+const REPLAY_ID = "Qh-HPZ1KI94";
+
+const REPLAY_COVERED = [
+  "🎙️ Our proprietary Voice AI — how it handles real inbound calls like a trained rep, not a robot",
+  "🤖 Conversational AI that qualifies and books leads while you sleep",
+  "🎫 Our ticketing system — built to replace the clunky helpdesk tools you're stuck with",
+  "💬 Live Q&A — bring your setup, we'll help you fix it live on the call",
+] as const;
 
 /**
  * Growthable's own published figures, mirrored from the stat bar on
@@ -122,12 +129,25 @@ export function OfficeHoursPage() {
               This Week&apos;s <span className="stroke-under">Replay</span>
             </h2>
             <p className="mx-auto mt-4 max-w-xl text-[1.02rem] leading-relaxed text-ink/75">
-              The replay will be posted here right after each session. In the meantime, here&apos;s
-              one of our most useful walkthroughs.
+              Missed the live session? Catch the full walkthrough below.
             </p>
 
             <div className="mx-auto mt-12 overflow-hidden rounded-2xl border border-line bg-white shadow-lift-lg">
               <LiteYouTube videoId={REPLAY_ID} title="Growthable office hours replay" />
+            </div>
+
+            <div className="mx-auto mt-10 max-w-xl text-left">
+              <p className="text-[1.02rem] font-semibold text-slate-deep">We covered:</p>
+              <ul className="mt-4 space-y-3.5">
+                {REPLAY_COVERED.map((item) => (
+                  <li
+                    key={item}
+                    className="text-[0.98rem] leading-[1.6] text-ink/80"
+                  >
+                    {item}
+                  </li>
+                ))}
+              </ul>
             </div>
 
             <div className="mt-12 flex flex-col items-center gap-3">
