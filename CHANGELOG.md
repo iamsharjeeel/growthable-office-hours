@@ -3,6 +3,7 @@
 ## 2026-07-31
 
 - Swapped office hours replay to YouTube live `Qh-HPZ1KI94` and added a "We covered" agenda under the embed
+- Replay thumbnail uses maxres YouTube art and a tighter `max-w-2xl` player so it no longer upscales soft
 
 ## 2026-07-24
 

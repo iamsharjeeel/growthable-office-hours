@@ -10,7 +10,7 @@ type Props = {
 
 export function LiteYouTube({ videoId, title }: Props) {
   const [playing, setPlaying] = useState(false);
-  const thumb = `https://i.ytimg.com/vi/${videoId}/hqdefault.jpg`;
+  const thumb = `https://i.ytimg.com/vi/${videoId}/maxresdefault.jpg`;
 
   if (playing) {
     return (
@@ -38,14 +38,15 @@ export function LiteYouTube({ videoId, title }: Props) {
         src={thumb}
         alt=""
         fill
-        sizes="(max-width: 896px) 100vw, 896px"
+        sizes="(max-width: 672px) 100vw, 672px"
+        quality={90}
         className="object-cover"
         loading="lazy"
       />
-      <span className="absolute inset-0 bg-slate-deep/20" aria-hidden />
+      <span className="absolute inset-0 bg-slate-deep/15" aria-hidden />
       <span className="absolute inset-0 flex items-center justify-center">
-        <span className="flex h-16 w-16 items-center justify-center rounded-full bg-brand text-white shadow-[0_10px_30px_rgba(37,49,61,0.35)] transition-transform duration-150 group-hover:scale-105 sm:h-[4.5rem] sm:w-[4.5rem]">
-          <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor" aria-hidden>
+        <span className="flex h-14 w-14 items-center justify-center rounded-full bg-brand text-white shadow-[0_10px_30px_rgba(37,49,61,0.35)] transition-transform duration-150 group-hover:scale-105 sm:h-16 sm:w-16">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" aria-hidden>
             <path d="M8.5 6.8v10.4L18 12 8.5 6.8Z" />
           </svg>
         </span>

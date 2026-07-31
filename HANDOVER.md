@@ -2,7 +2,7 @@
 
 ## What changed
 
-- Replay section now embeds YouTube live `Qh-HPZ1KI94` with a "We covered" list under the player
+- Replay section now embeds YouTube live `Qh-HPZ1KI94` with a "We covered" list under the player; thumb uses `maxresdefault` in a `max-w-2xl` frame
 - Scaffolded Next.js + Tailwind app for Growthable office hours landing page
 - Matched brand palette (navy `#152039`, accent `#e8406a` / `#f23e67`) and Montserrat typography
 - Built hero with wireframe mesh, design copy, floating register card, host section
@@ -139,8 +139,8 @@ entered values preserved.
   bytes and cannot use `next/font`. `src/app/opengraph-image.tsx` has the exact
   5-line upgrade in a comment; drop two Poppins TTFs into `assets/` to apply it.
 - Replay section points at YouTube live `Qh-HPZ1KI94` with a "We covered" agenda
-  under the embed. Swap `REPLAY_ID` / `REPLAY_COVERED` in `OfficeHoursPage.tsx`
-  when the next replay lands.
+  under the embed (`max-w-2xl`, `maxresdefault` thumb). Swap `REPLAY_ID` /
+  `REPLAY_COVERED` in `OfficeHoursPage.tsx` when the next replay lands.
 - `public/growthable-logo.png` (white wordmark, for dark backgrounds) is now unused — the page uses
   `growthable-logo-dark.png`. Kept in case a dark surface comes back.
 

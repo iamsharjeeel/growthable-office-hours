@@ -124,15 +124,15 @@ export function OfficeHoursPage() {
 
       <Reveal>
         <section className="border-t border-line px-5 py-20 sm:px-8 sm:py-24 lg:py-28">
-          <div className="mx-auto max-w-4xl text-center">
+          <div className="mx-auto max-w-2xl text-center">
             <h2 className={heading}>
               This Week&apos;s <span className="stroke-under">Replay</span>
             </h2>
-            <p className="mx-auto mt-4 max-w-xl text-[1.02rem] leading-relaxed text-ink/75">
+            <p className="mx-auto mt-4 max-w-md text-[1.02rem] leading-relaxed text-ink/75">
               Missed the live session? Catch the full walkthrough below.
             </p>
 
-            <div className="mx-auto mt-12 overflow-hidden rounded-2xl border border-line bg-white shadow-lift-lg">
+            <div className="mx-auto mt-10 overflow-hidden rounded-xl border border-line bg-white shadow-lift">
               <LiteYouTube videoId={REPLAY_ID} title="Growthable office hours replay" />
             </div>
 
