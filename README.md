@@ -54,6 +54,7 @@ src/app/
   layout.tsx             # fonts + metadata (OG / Twitter / canonical)
   page.tsx               # renders OfficeHoursPage
   globals.css            # brand design tokens
+  favicon.ico / icon.png / apple-icon.png  # Growthable monogram
   opengraph-image.tsx    # generated 1200x630 share card
   session.ics/route.ts   # calendar invite download
   api/register/route.ts  # forwards registrations to LeadConnector

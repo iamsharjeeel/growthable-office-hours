@@ -1,5 +1,9 @@
 # Changelog
 
+## 2026-07-31
+
+- Replaced the default Vercel favicon with the Growthable monogram (`favicon.ico` 16/32/48, `icon.png`, `apple-icon.png`)
+
 ## 2026-07-24
 
 - Added Growthable office hours landing page (hero, register form, host section) with brand colors and Montserrat

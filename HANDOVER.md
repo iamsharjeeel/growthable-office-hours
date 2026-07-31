@@ -2,6 +2,7 @@
 
 ## What changed
 
+- Favicon set to the Growthable monogram (transparent `favicon.ico` + `icon.png`, white-tile `apple-icon.png` in `src/app/`)
 - Scaffolded Next.js + Tailwind app for Growthable office hours landing page
 - Matched brand palette (navy `#152039`, accent `#e8406a` / `#f23e67`) and Montserrat typography
 - Built hero with wireframe mesh, design copy, floating register card, host section
@@ -118,6 +119,18 @@ entered values preserved.
 - Google Calendar prefill link built from the same config.
 - Single event, deliberately not recurring — attendees register per session, so a
   standing `RRULE` would leave a permanent event they never asked for.
+
+## Favicon
+
+App Router file convention in `src/app/`:
+
+| File | Role |
+| --- | --- |
+| `favicon.ico` | 16 / 32 / 48, transparent PNG-in-ICO |
+| `icon.png` | 192×192 transparent (tabs / high-DPI) |
+| `apple-icon.png` | 180×180 on white (iOS home screen) |
+
+Source art: Growthable monogram JPEG. White knocked out, content padded ~12%, Lanczos downscale. Swap by regenerating those three files — no layout metadata needed.
 
 ## Pending
 
