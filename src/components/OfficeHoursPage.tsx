@@ -76,7 +76,7 @@ export function OfficeHoursPage() {
               <Reveal>
                 <div className="mt-0 lg:mt-10">
                   <p className="text-[1.02rem] font-semibold text-slate-deep">
-                    This week we&apos;re covering:
+                    No fixed agenda — we work through whatever&apos;s live:
                   </p>
                   <ul className="mt-4 space-y-3.5">
                     {SESSION.topics.map((item) => (
@@ -92,7 +92,7 @@ export function OfficeHoursPage() {
                 </div>
 
                 <p className="mt-8 text-[1.05rem] font-semibold tracking-tight text-slate-deep">
-                  Come with questions. Leave with a plan.
+                  Come with questions, or just come watch and see what sticks.
                 </p>
               </Reveal>
             </div>

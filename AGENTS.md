@@ -6,8 +6,10 @@ This version has breaking changes — APIs, conventions, and file structure may 
 
 # Updating the weekly office hours session
 
-**If you were asked to "update the office hours page" for a new week, this is the
-whole job. Read this section before opening any component.**
+There is **no per-week agenda anymore**. Every session works through whatever's
+live at the time — no fixed topic, no plan to publish in advance. If you were
+asked to "update the office hours page for this week," there usually isn't a
+routine content change to make; see "You do NOT need to change the date" below.
 
 ## The one file you edit
 
@@ -18,27 +20,31 @@ truth for the session. These all derive from it automatically:
 | --- | --- |
 | `Weekly @ <date> — <time> · <duration>` line | `src/components/SessionDate.tsx` |
 | Live countdown | `src/components/Countdown.tsx` |
-| `This week we're covering:` bullet list | `src/components/OfficeHoursPage.tsx` |
+| "No fixed agenda" bullet list of examples | `src/components/OfficeHoursPage.tsx` |
 | Calendar invite: `.ics` + Google Calendar | `src/lib/calendar.ts`, `/session.ics` |
-| Agenda inside the calendar invite | same `topics` array as the bullet list |
+| Example list inside the calendar invite | same `topics` array as the bullet list |
 | `session_date` sent to the CRM webhook | `src/app/api/register/route.ts` |
 | Session date on the social share card | `src/app/opengraph-image.tsx` |
 
-## The routine weekly change
+## `SESSION.topics` is evergreen, not weekly
 
-Replace the four strings in `SESSION.topics`. That is it. Those strings are both
-the on-page agenda and the agenda in the calendar invite, so they stay in sync
-by construction.
+`topics` used to be a per-week agenda. It isn't anymore — it's a short, static
+list of examples of the kind of thing that comes up (Voice AI, Conversational
+AI, ticketing, automations, campaigns, "you name it"), rendered under the
+heading "No fixed agenda — we work through whatever's live:". It stays in sync
+between the page and the calendar invite by construction, but it should rarely
+need editing at all.
 
-House style for a topic: one line, sentence case, no trailing period, and it
-names a concrete thing the viewer will see. Match the existing entries — an
-em-dash clause explaining the payoff is the established pattern:
+If you're ever asked to change it anyway, house style is unchanged: one line,
+sentence case, no trailing period, naming a concrete thing the viewer will see.
+An em-dash clause explaining the payoff is the established pattern:
 
 ```ts
 topics: [
-  "Our new SMS drip builder — how to launch a 5-touch sequence in under ten minutes",
-  "Snapshot loading, start to finish, on a fresh sub-account",
-  "Live Q&A — bring your setup, we'll help you fix it on the call",
+  "Voice AI — how it handles real inbound calls, live",
+  "Conversational AI — qualifying and booking leads while you watch",
+  "Our ticketing system and GHL automations — the plumbing behind client ops",
+  "Client campaigns — and whatever else is live that week",
 ],
 ```
 

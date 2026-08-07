@@ -50,10 +50,10 @@ function description(): string {
   return [
     `Hosted live by ${SESSION.host}.`,
     "",
-    "On the agenda:",
+    "No fixed agenda — we work through whatever's live, for example:",
     agendaLines(),
     "",
-    "Come with questions. Leave with a plan.",
+    "Come with questions, or just come watch and see what sticks.",
     "",
     join,
   ].join("\n");

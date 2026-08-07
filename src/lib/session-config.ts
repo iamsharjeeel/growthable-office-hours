@@ -10,7 +10,7 @@
  *
  *   - the "Weekly @ ..." date line in the hero        (src/components/SessionDate.tsx)
  *   - the live countdown                              (src/components/Countdown.tsx)
- *   - the "This week we're covering:" bullet list     (src/components/OfficeHoursPage.tsx)
+ *   - the "no fixed agenda" bullet list of examples  (src/components/OfficeHoursPage.tsx)
  *   - the Add-to-Calendar invite (.ics + Google)      (src/lib/calendar.ts, /session.ics)
  *   - the session_date sent to the CRM webhook        (src/app/api/register/route.ts)
  *
@@ -21,21 +21,21 @@
  * update just because a week passed.
  *
  * ----------------------------------------------------------------------------
- * TASK: "update the office hours page for this week"
- * ----------------------------------------------------------------------------
- * Edit `topics` below, and nothing else. Those four strings are the agenda:
- * they render as the hero bullet list AND become the agenda in the calendar
- * invite. Keep them to one line each, sentence case, no trailing period —
- * match the tone of the existing entries.
+ * There is deliberately no per-week agenda field. Every session covers
+ * whatever's live at the time, so `topics` below is an evergreen list of
+ * examples (Voice AI, Conversational AI, ticketing, automations, campaigns —
+ * "you name it"), not a schedule to update each week. It rarely needs to
+ * change; when it does, keep entries one line each, sentence case, no
+ * trailing period, matching the tone of the existing entries.
  *
  * TASK: "the session moved to a different day or time"
  * ----------------------------------------------------------------------------
  * Change `weekday`, `startHour`, `startMinute` or `timeZone`. Do NOT hardcode
  * a formatted string like "Tuesday 2PM PDT" anywhere — the headline, the
  * invite and the visitor's local-time line are all derived, and DST is handled
- * for you. Also update the two places that mention the cadence in prose:
- * `topics`' surrounding copy in OfficeHoursPage.tsx ("Every Tuesday, ...",
- * "seats refresh every Tuesday") — those are marketing copy, not config.
+ * for you. Also update the places that mention the cadence in prose in
+ * OfficeHoursPage.tsx ("Every Tuesday, ...", "seats refresh every Tuesday")
+ * — those are marketing copy, not config.
  *
  * TASK: "the session is longer/shorter"
  * ----------------------------------------------------------------------------
@@ -81,14 +81,17 @@ export const SESSION = {
   joinUrl: "",
 
   /**
-   * THIS WEEK'S AGENDA. Renders as the hero bullet list and as the agenda in
-   * the calendar invite. This is the field you change each week.
+   * There is no fixed weekly agenda anymore — every session works through
+   * whatever's live at the time. These are evergreen examples of what that
+   * tends to mean, not this week's plan, so this list rarely needs editing.
+   * Renders as the hero bullet list and as the "what we might get into"
+   * section of the calendar invite.
    */
   topics: [
-    "Our proprietary Voice AI — how it handles real inbound calls like a trained rep, not a robot",
-    "Conversational AI that qualifies and books leads while you sleep",
-    "Our ticketing system — built to actually replace the clunky helpdesk tools you're stuck with",
-    "Live Q&A — bring your setup, we'll help you fix it on the call",
+    "Voice AI — how it handles real inbound calls, live",
+    "Conversational AI — qualifying and booking leads while you watch",
+    "Our ticketing system and GHL automations — the plumbing behind client ops",
+    "Client campaigns — and whatever else is live that week",
   ],
 } as const;
 

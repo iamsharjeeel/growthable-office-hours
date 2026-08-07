@@ -123,7 +123,7 @@ export default async function Image() {
             height={51}
           />
           <div style={{ display: "flex", fontSize: 25, color: INK }}>
-            Come with questions. Leave with a plan.
+            No fixed agenda — come see what&apos;s live.
           </div>
         </div>
       </div>
