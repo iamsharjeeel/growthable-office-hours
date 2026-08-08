@@ -92,6 +92,10 @@ export const SESSION = {
   ],
 } as const;
 
+/** Slim announcement strip under the header. Set to "" to hide. */
+export const BONUS_BANNER =
+  "Show up live and you’ll get special bonuses worth $100+";
+
 /** Public origin, used for canonical URLs, OG tags and the invite URL. */
 export const SITE_URL =
   process.env.NEXT_PUBLIC_SITE_URL ??

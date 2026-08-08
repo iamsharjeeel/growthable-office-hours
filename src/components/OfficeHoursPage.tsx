@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useState } from "react";
+import { BonusBanner } from "@/components/BonusBanner";
 import { LiteYouTube } from "@/components/LiteYouTube";
 import { Logo } from "@/components/Logo";
 import { RegisterForm } from "@/components/RegisterForm";
@@ -40,6 +41,8 @@ export function OfficeHoursPage() {
           <Logo />
         </div>
       </header>
+
+      <BonusBanner />
 
       <section className="relative overflow-hidden">
         <WireframeMesh />

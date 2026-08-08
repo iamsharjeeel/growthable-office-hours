@@ -1,5 +1,9 @@
 # Changelog
 
+## 2026-08-08
+
+- Added a slim branded bonus banner under the header (`BONUS_BANNER` in `session-config.ts`)
+
 ## 2026-07-24
 
 - Added Growthable office hours landing page (hero, register form, host section) with brand colors and Montserrat
