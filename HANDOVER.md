@@ -2,6 +2,7 @@
 
 ## What changed
 
+- Added a slim branded bonus banner under the header (`BonusBanner` + `BONUS_BANNER` in `session-config.ts`); set the string to `""` to hide
 - Scaffolded Next.js + Tailwind app for Growthable office hours landing page
 - Matched brand palette (navy `#152039`, accent `#e8406a` / `#f23e67`) and Montserrat typography
 - Built hero with wireframe mesh, design copy, floating register card, host section
@@ -70,6 +71,9 @@ Ship a studio-quality branded registration page from the Growthable office-hours
 
 ## Files touched
 
+- `src/lib/session-config.ts` — `BONUS_BANNER` copy (empty string hides the strip)
+- `src/components/BonusBanner.tsx` — slim brand-tint announcement under the header
+- `src/components/OfficeHoursPage.tsx` — mounts `BonusBanner`
 - `src/app/page.tsx` — landing composition + session copy
 - `src/app/layout.tsx` — Poppins + IBM Plex Mono + metadata
 - `src/app/globals.css` — brand tokens, `.cta`, `.stroke-under`, motion

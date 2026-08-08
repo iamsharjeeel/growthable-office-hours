@@ -40,6 +40,9 @@ countdown, calendar invite and share card all roll forward on their own.
 what not to do. It is written so an AI coding agent picking this up cold in a
 later week makes the change in the right place.
 
+The header bonus strip is `BONUS_BANNER` in the same file — edit the copy or set
+it to `""` to hide.
+
 ## Stack
 
 - Next.js 16 (App Router)
@@ -57,9 +60,9 @@ src/app/
   opengraph-image.tsx    # generated 1200x630 share card
   session.ics/route.ts   # calendar invite download
   api/register/route.ts  # forwards registrations to LeadConnector
-src/components/          # page sections, form, countdown, calendar CTAs
+src/components/          # page sections, form, countdown, banner, calendar CTAs
 src/lib/
-  session-config.ts      # ← SINGLE SOURCE OF TRUTH for the session
+  session-config.ts      # ← SINGLE SOURCE OF TRUTH for the session (+ BONUS_BANNER)
   session.ts             # date resolution + formatting
   calendar.ts            # .ics + Google Calendar generation
 public/growthable-logo-dark.png
